@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrueTicket.shop — FIFA World Cup 2026 Tickets</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white:#ffffff;--off:#f7f9f5;--off2:#eef2ea;
+  --green:#1a7a3c;--green2:#22a050;--green3:#2ec766;
+  --green-light:rgba(26,122,60,0.07);
+  --gold:#b8860b;--gold2:#d4a017;--gold3:#f0c040;--gold4:#fde68a;
+  --gold-light:rgba(184,134,11,0.09);
+  --dark:#0c1a0e;--dark2:#1a2e1d;
+  --muted:#4e6a56;--muted2:#8aa090;
+  --border:rgba(26,122,60,0.11);--border2:rgba(26,122,60,0.2);
+  --shadow:0 2px 16px rgba(14,26,16,0.07);
+  --shadow-lg:0 8px 40px rgba(14,26,16,0.11);
+  --red:#c93428;--amber:#b86c00;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--dark);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+#field-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.wrap{position:relative;z-index:1;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:66px;background:rgba(255,255,255,0.94);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:25px;letter-spacing:2px;text-decoration:none;display:flex;align-items:baseline;gap:1px;}
+.l-true{color:var(--dark);}
+.l-tick{color:var(--green);}
+.l-dot{color:var(--gold2);font-size:27px;}
+.l-shop{color:var(--muted2);font-size:17px;letter-spacing:1px;}
+.nav-links{display:flex;gap:26px;align-items:center;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13.5px;font-weight:500;transition:color .2s;}
+.nav-links a:hover{color:var(--green);}
+.nav-cta{background:var(--green)!important;color:#fff!important;padding:9px 20px;border-radius:6px;font-weight:600!important;font-size:13px!important;}
+.nav-cta:hover{background:var(--dark2)!important;color:#fff!important;}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 5% 80px;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--gold-light);border:1px solid rgba(184,134,11,0.22);border-radius:24px;padding:7px 18px;font-size:11.5px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:26px;}
+.ldot{width:7px;height:7px;border-radius:50%;background:var(--gold2);animation:ldp 1.8s infinite;display:inline-block;}
+@keyframes ldp{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.6)}}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(58px,10vw,128px);line-height:.92;letter-spacing:3px;color:var(--dark);margin-bottom:8px;}
+.ht-green{color:var(--green);}
+.ht-gold{-webkit-text-stroke:2.5px var(--gold2);color:transparent;display:block;}
+.hero-sub{font-size:clamp(14px,1.7vw,17px);color:var(--muted);font-weight:300;max-width:500px;margin:16px auto 38px;line-height:1.75;}
+.hero-sub strong{color:var(--dark);font-weight:600;}
+.hero-btns{display:flex;gap:11px;justify-content:center;flex-wrap:wrap;}
+.btn-g{background:var(--green);color:#fff;font-weight:600;font-size:14.5px;padding:13px 30px;border-radius:6px;border:none;cursor:pointer;text-decoration:none;transition:all .2s;box-shadow:0 4px 18px rgba(26,122,60,0.22);}
+.btn-g:hover{background:var(--dark2);transform:translateY(-2px);}
+.btn-o{background:#fff;color:var(--dark);font-weight:600;font-size:14.5px;padding:12px 24px;border-radius:6px;border:1.5px solid var(--border2);cursor:pointer;text-decoration:none;transition:all .2s;display:flex;align-items:center;gap:7px;}
+.btn-o:hover{border-color:var(--green);color:var(--green);}
+.hero-trust{margin-top:52px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.tp{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:500;color:var(--muted);background:var(--off);border:1px solid var(--border);border-radius:20px;padding:6px 13px;}
+.tpi{width:20px;height:20px;border-radius:50%;background:var(--green-light);display:flex;align-items:center;justify-content:center;font-size:11px;}
+
+/* GOLD BAR */
+.gold-bar{height:3px;background:linear-gradient(90deg,transparent 0%,var(--gold3) 20%,var(--gold2) 50%,var(--gold3) 80%,transparent 100%);}
+
+/* TICKER */
+.ticker-bar{background:var(--dark);padding:10px 0;overflow:hidden;}
+.ticker-inner{display:flex;gap:56px;animation:tick 28s linear infinite;white-space:nowrap;}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ti{font-size:12px;color:rgba(255,255,255,.65);font-weight:500;letter-spacing:.4px;display:flex;align-items:center;gap:8px;}
+.ti-g{color:var(--gold3);font-weight:600;}
+.ti-sep{color:var(--green3);}
+
+/* TROPHY BANNER */
+.trophy-banner{background:linear-gradient(135deg,var(--dark) 0%,#1a3020 55%,var(--dark2) 100%);padding:68px 5%;text-align:center;position:relative;overflow:hidden;}
+.trophy-banner::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 44px,rgba(184,134,11,0.03) 44px,rgba(184,134,11,0.03) 88px);}
+.tbi{position:relative;z-index:1;}
+.tbig{font-size:68px;display:block;margin-bottom:16px;filter:drop-shadow(0 0 22px rgba(240,192,64,.45));}
+.tb-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(30px,5vw,54px);letter-spacing:3px;color:#fff;margin-bottom:8px;}
+.tb-title span{color:var(--gold3);}
+.tb-sub{color:rgba(255,255,255,.5);font-size:14.5px;font-weight:300;max-width:480px;margin:0 auto 28px;line-height:1.7;}
+.tb-stats{display:flex;gap:36px;justify-content:center;flex-wrap:wrap;margin-bottom:32px;}
+.ts{text-align:center;border-left:1px solid rgba(255,255,255,.1);padding-left:24px;}
+.ts:first-child{border-left:none;padding-left:0;}
+.ts-num{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:1px;color:var(--gold3);}
+.ts-lbl{font-size:10.5px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;}
+
+/* SECTIONS */
+section{position:relative;z-index:1;}
+.sp{padding:80px 5%;}
+.sh{text-align:center;margin-bottom:48px;}
+.sl{display:inline-block;font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);margin-bottom:10px;padding:4px 12px;background:var(--green-light);border-radius:12px;}
+.st{font-family:'Bebas Neue',sans-serif;font-size:clamp(34px,5vw,54px);letter-spacing:2px;color:var(--dark);margin-bottom:8px;}
+.ga{color:var(--gold);}
+.ss{color:var(--muted);font-size:15px;font-weight:300;}
+
+/* FILTERS */
+.filters{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:42px;}
+.fb{padding:8px 20px;border-radius:20px;border:1.5px solid var(--border2);background:#fff;color:var(--muted);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;}
+.fb:hover,.fb.active{background:var(--green);border-color:var(--green);color:#fff;}
+
+/* TICKET GRID */
+.tg{display:grid;grid-template-columns:repeat(auto-fill,minmax(325px,1fr));gap:20px;max-width:1150px;margin:0 auto;}
+.tc{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform .22s,box-shadow .22s;box-shadow:var(--shadow);}
+.tc:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg),0 0 0 1px var(--border2);}
+.tc.lq{border-color:rgba(201,58,47,.2);animation:rg 2.5s ease-in-out infinite;}
+@keyframes rg{0%,100%{box-shadow:0 0 0 1px rgba(201,58,47,.1),var(--shadow)}50%{box-shadow:0 0 0 2px rgba(201,58,47,.22),0 4px 24px rgba(201,58,47,.1)}}
+.ct{background:linear-gradient(135deg,var(--dark) 0%,var(--dark2) 100%);padding:17px 19px 15px;border-bottom:1px solid rgba(255,255,255,.04);position:relative;}
+.cb-badge{position:absolute;top:13px;right:13px;padding:4px 9px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+.bvip{background:linear-gradient(135deg,var(--gold3),var(--gold2));color:#2a1500;}
+.bc1{background:rgba(255,255,255,.11);color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.18);}
+.bc2{background:rgba(34,160,80,.18);color:#7effa0;border:1px solid rgba(34,160,80,.28);}
+.bc3{background:rgba(255,255,255,.05);color:rgba(255,255,255,.45);}
+.mn{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:.5px;color:#fff;padding-right:76px;line-height:1.15;margin-bottom:7px;}
+.mm{display:flex;gap:11px;flex-wrap:wrap;}
+.mi{font-size:11px;color:rgba(255,255,255,.48);display:flex;align-items:center;gap:4px;}
+.cb{padding:15px 19px 17px;}
+.sr{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px;padding:9px 11px;background:var(--off);border-radius:7px;border:1px solid var(--border);}
+.ql{font-size:12px;font-weight:600;}
+.qc{color:var(--red);}.qw{color:var(--amber);}.qo{color:var(--green);}
+.cd{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;letter-spacing:.5px;}
+.cdc{color:var(--red);animation:blk 1s ease-in-out infinite;}.cdw{color:var(--amber);}.cdo{color:var(--muted2);}
+@keyframes blk{0%,100%{opacity:1}50%{opacity:.4}}
+.cdl{font-size:10px;color:var(--muted2);display:block;text-align:right;}
+.pr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:13px;}
+.price{font-family:'Bebas Neue',sans-serif;font-size:37px;letter-spacing:1px;color:var(--dark);}
+.price .cur{font-size:19px;color:var(--muted2);}
+.pright{text-align:right;}
+.pper{font-size:11px;color:var(--muted2);}
+.pcryp{font-size:11px;color:var(--green);font-weight:600;}
+.cbtns{display:flex;gap:8px;}
+.bbuy{flex:1;background:var(--green);color:#fff;font-weight:600;font-size:13.5px;padding:11px 0;border-radius:6px;border:none;cursor:pointer;transition:all .18s;font-family:'DM Sans',sans-serif;}
+.bbuy:hover{background:var(--dark2);transform:translateY(-1px);}
+.bres{flex:1;background:#fff;color:var(--dark);font-weight:500;font-size:13px;padding:11px 0;border-radius:6px;border:1.5px solid var(--border2);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:5px;font-family:'DM Sans',sans-serif;}
+.bres:hover{border-color:#25d366;color:#25d366;}
+.wsv{width:14px;height:14px;fill:currentColor;}
+
+/* TRUST */
+.trust-sec{background:var(--off);padding:72px 5%;}
+.trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:17px;max-width:1060px;margin:0 auto;}
+.tcard{background:#fff;border:1px solid var(--border);border-radius:12px;padding:24px 20px;text-align:center;transition:border-color .2s,box-shadow .2s;}
+.tcard:hover{border-color:var(--green2);box-shadow:0 4px 18px rgba(26,122,60,.07);}
+.tiw{width:50px;height:50px;border-radius:50%;background:var(--green-light);border:1px solid rgba(26,122,60,.14);display:flex;align-items:center;justify-content:center;font-size:21px;margin:0 auto 13px;}
+.tcard h3{font-size:15px;font-weight:600;color:var(--dark);margin-bottom:6px;}
+.tcard p{font-size:13px;color:var(--muted);line-height:1.65;}
+
+/* CRYPTO */
+.crypto-sec{background:#fff;padding:80px 5%;}
+.crypto-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(295px,1fr));gap:17px;max-width:1100px;margin:0 auto 36px;}
+.cc{background:var(--off);border:1px solid var(--border);border-radius:12px;padding:19px 21px;transition:all .2s;}
+.cc:hover{border-color:var(--green2);box-shadow:0 4px 18px rgba(26,122,60,.07);}
+.cch{display:flex;align-items:center;gap:11px;margin-bottom:11px;}
+.clogo{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;flex-shrink:0;}
+.cl-btc{background:#fff3e0;color:#f7931a;}
+.cl-eth{background:#f0ecff;color:#627eea;}
+.cl-utrc{background:#e0fff2;color:#26a17b;}
+.cl-ubnb{background:#fffce0;color:#f0b90b;}
+.cl-sol{background:#f4eeff;color:#9945ff;}
+.cl-bnb{background:#fff8e0;color:#f0b90b;}
+.cname{font-weight:600;font-size:14.5px;color:var(--dark);}
+.cnet{font-size:11px;color:var(--muted2);margin-top:1px;}
+.caw{background:#fff;border:1px solid var(--border);border-radius:7px;padding:9px 11px;display:flex;align-items:center;gap:9px;}
+.cat{flex:1;font-family:'Courier New',monospace;font-size:11px;color:var(--muted);word-break:break-all;line-height:1.5;}
+.copybtn{background:var(--green-light);border:1px solid rgba(26,122,60,.18);color:var(--green);padding:5px 11px;border-radius:5px;font-size:11.5px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all .15s;flex-shrink:0;}
+.copybtn:hover{background:var(--green);color:#fff;}
+.pnbox{max-width:800px;margin:0 auto;background:linear-gradient(135deg,rgba(184,134,11,.06),rgba(212,160,23,.03));border:1px solid rgba(184,134,11,.18);border-left:4px solid var(--gold2);border-radius:10px;padding:17px 21px;display:flex;gap:13px;align-items:flex-start;}
+.pnicon{font-size:20px;flex-shrink:0;margin-top:2px;}
+.pntxt{font-size:13.5px;color:var(--muted);line-height:1.75;}
+.pntxt strong{color:var(--gold);}
+.pwabtn{display:flex;align-items:center;justify-content:center;gap:9px;background:#25d366;color:#fff;font-weight:700;font-size:14.5px;padding:13px 26px;border-radius:8px;border:none;cursor:pointer;text-decoration:none;margin:22px auto 0;font-family:'DM Sans',sans-serif;transition:background .2s;width:fit-content;}
+.pwabtn:hover{background:#1da855;}
+.pwabtn svg{width:19px;height:19px;fill:#fff;}
+
+/* TESTIMONIALS */
+.testi-sec{background:var(--off);padding:68px 5%;}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:17px;max-width:1080px;margin:0 auto;}
+.testi-c{background:#fff;border:1px solid var(--border);border-radius:12px;padding:21px;}
+.stars{color:var(--gold2);font-size:13px;margin-bottom:9px;letter-spacing:1px;}
+.tt{font-size:13.5px;color:var(--muted);line-height:1.75;margin-bottom:14px;font-style:italic;}
+.tau{display:flex;align-items:center;gap:9px;}
+.av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green2));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;}
+.an{font-size:13px;font-weight:600;color:var(--dark);}
+.al{font-size:11px;color:var(--muted2);}
+
+/* FAQ */
+.faq-sec{background:#fff;padding:76px 5%;}
+.faq-list{max-width:740px;margin:0 auto;}
+.fi{border-bottom:1px solid var(--border);}
+.fq{width:100%;background:none;border:none;color:var(--dark);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;text-align:left;padding:17px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:color .2s;}
+.fq:hover{color:var(--green);}
+.fch{font-size:18px;color:var(--muted2);transition:transform .3s;flex-shrink:0;}
+.fq.open .fch{transform:rotate(45deg);color:var(--green);}
+.fa{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s;color:var(--muted);font-size:14px;line-height:1.78;}
+.fa.open{max-height:200px;padding-bottom:17px;}
+
+/* FOOTER */
+footer{background:var(--dark);padding:50px 5% 26px;}
+.ft{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:34px;margin-bottom:38px;}
+.fd{font-size:13px;color:rgba(255,255,255,.38);max-width:270px;line-height:1.72;margin-top:9px;}
+.fc h4{font-size:10.5px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.32);margin-bottom:13px;}
+.fc a{display:block;font-size:13px;color:rgba(255,255,255,.52);text-decoration:none;margin-bottom:8px;transition:color .2s;}
+.fc a:hover{color:var(--green3);}
+.fb2{border-top:1px solid rgba(255,255,255,.07);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:9px;}
+.fb2 p{font-size:12px;color:rgba(255,255,255,.28);}
+.disc{font-size:11px;color:rgba(255,255,255,.18);max-width:480px;line-height:1.5;}
+
+/* WA FLOAT */
+.wa-float{position:fixed;bottom:24px;right:24px;z-index:200;display:none;flex-direction:column;align-items:flex-end;gap:9px;}
+.wab{background:#fff;border:1px solid rgba(37,211,102,.2);border-radius:10px;padding:8px 14px;font-size:12px;color:var(--dark);box-shadow:var(--shadow-lg);white-space:nowrap;}
+.wab span{color:#25d366;font-weight:600;}
+.wafloat-btn{width:54px;height:54px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 18px rgba(37,211,102,.32);transition:transform .2s,box-shadow .2s;text-decoration:none;position:relative;}
+.wafloat-btn:hover{transform:scale(1.08);box-shadow:0 6px 26px rgba(37,211,102,.48);}
+.wafloat-btn svg{width:28px;height:28px;fill:#fff;}
+.wan{position:absolute;top:-3px;right:-3px;width:16px;height:16px;background:var(--red);border-radius:50%;font-size:9px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;border:2px solid #fff;}
+
+/* MODAL */
+.mo{position:fixed;inset:0;background:rgba(14,26,16,.5);backdrop-filter:blur(6px);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s;}
+.mo.open{opacity:1;pointer-events:all;}
+.modal{background:#fff;border:1px solid var(--border2);border-radius:16px;padding:32px;max-width:450px;width:100%;position:relative;transform:translateY(14px);transition:transform .3s;box-shadow:var(--shadow-lg);}
+.mo.open .modal{transform:translateY(0);}
+.mcl{position:absolute;top:13px;right:15px;background:none;border:none;color:var(--muted2);font-size:21px;cursor:pointer;line-height:1;}
+.mcl:hover{color:var(--dark);}
+.mtl{width:38px;height:3px;background:linear-gradient(90deg,var(--green),var(--gold2));border-radius:2px;margin-bottom:16px;}
+.modal h3{font-family:'Bebas Neue',sans-serif;font-size:25px;letter-spacing:1px;margin-bottom:4px;color:var(--dark);}
+.mm2{font-size:12.5px;color:var(--green);font-weight:600;margin-bottom:16px;}
+.mstep{background:var(--off);border:1px solid var(--border);border-radius:7px;padding:11px 13px;margin-bottom:9px;font-size:13px;color:var(--muted);line-height:1.65;}
+.mstep strong{color:var(--dark);}
+.mwabtn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;background:#25d366;color:#fff;font-weight:700;font-size:14.5px;padding:13px;border-radius:8px;border:none;cursor:pointer;margin-top:16px;font-family:'DM Sans',sans-serif;transition:background .2s;text-decoration:none;}
+.mwabtn:hover{background:#1da855;}
+.mwabtn svg{width:19px;height:19px;fill:#fff;}
+
+/* DIVIDER */
+.dg{height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);}
+
+@media(max-width:768px){.nav-links{display:none;}.hero-title{font-size:54px;}.ft{flex-direction:column;}.tb-stats{gap:18px;}}
+@media(max-width:480px){.hero-title{font-size:42px;}.tg{grid-template-columns:1fr;}.cbtns{flex-direction:column;}.crypto-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<canvas id="field-canvas"></canvas>
+<div class="wrap">
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo"><span class="l-true">True</span><span class="l-tick">Ticket</span><span class="l-dot">.</span><span class="l-shop">shop</span></a>
+  <div class="nav-links">
+    <a href="#tickets">Tickets</a>
+    <a href="#payment">Payment</a>
+    <a href="#faq">FAQ</a>
+    <a href="#" onclick="openWA('Hi, I want to buy a World Cup ticket')" class="nav-cta">💬 Chat to Buy</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-eyebrow"><span>🏆</span> FIFA World Cup 2026 <span class="ldot"></span> Tickets Available Now</div>
+  <h1 class="hero-title">
+    Secure Your<br>
+    <span class="ht-green">World Cup</span><br>
+    <span class="ht-gold">Seat</span>
+  </h1>
+  <p class="hero-sub"><strong>Verified resale tickets.</strong> Limited availability on the most anticipated tournament on Earth. Don't miss your chance.</p>
+  <div class="hero-btns">
+    <a href="#tickets" class="btn-g">Browse Tickets</a>
+    <a href="#" onclick="openWA('Hi, I want to buy a World Cup ticket')" class="btn-o">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Chat to Buy
+    </a>
+  </div>
+  <div class="hero-trust">
+    <div class="tp"><div class="tpi">✅</div>Verified Seller</div>
+    <div class="tp"><div class="tpi">🔒</div>Secure Purchase</div>
+    <div class="tp"><div class="tpi">📲</div>Direct Delivery</div>
+    <div class="tp"><div class="tpi">⚡</div>Instant Confirmation</div>
+  </div>
+</section>
+
+<!-- GOLD BAR -->
+<div class="gold-bar"></div>
+
+<!-- TICKER -->
+<div class="ticker-bar"><div class="ticker-inner" id="ticker"></div></div>
+
+<!-- TROPHY BANNER -->
+<div class="trophy-banner">
+  <div class="tbi">
+    <span class="tbig">🏆</span>
+    <h2 class="tb-title">THE GREATEST <span>SHOW ON EARTH</span></h2>
+    <p class="tb-sub">48 nations. 16 venues. 104 matches. One champion. Don't miss history.</p>
+    <div class="tb-stats">
+      <div class="ts"><div class="ts-num">48</div><div class="ts-lbl">Nations</div></div>
+      <div class="ts"><div class="ts-num">104</div><div class="ts-lbl">Matches</div></div>
+      <div class="ts"><div class="ts-num">16</div><div class="ts-lbl">Stadiums</div></div>
+      <div class="ts"><div class="ts-num">3.5M</div><div class="ts-lbl">Fans Expected</div></div>
+    </div>
+    <a href="#tickets" class="btn-g">View Available Tickets</a>
+  </div>
+</div>
+
+<!-- TICKETS -->
+<section id="tickets" class="sp" style="background:#fff;">
+  <div class="sh"><div class="sl">Available Now</div><h2 class="st">Browse <span class="ga">Match</span> Tickets</h2><p class="ss">Select your match and secure your seat before it's gone</p></div>
+  <div class="filters">
+    <button class="fb active" onclick="filterT('all',this)">All Matches</button>
+    <button class="fb" onclick="filterT('group',this)">Group Stage</button>
+    <button class="fb" onclick="filterT('knockout',this)">Knockout</button>
+    <button class="fb" onclick="filterT('final',this)">Finals</button>
+    <button class="fb" onclick="filterT('vip',this)">VIP Only</button>
+  </div>
+  <div class="tg" id="tgrid"></div>
+</section>
+
+<div class="dg"></div>
+
+<!-- TRUST -->
+<div class="trust-sec">
+  <div class="sh"><div class="sl">Why Choose Us</div><h2 class="st">Trusted by <span class="ga">Thousands</span></h2></div>
+  <div class="trust-grid">
+    <div class="tcard"><div class="tiw">🎟️</div><h3>100% Verified Tickets</h3><p>Every ticket is manually verified and authenticated before delivery. No fakes, guaranteed.</p></div>
+    <div class="tcard"><div class="tiw">⚡</div><h3>Fast Digital Delivery</h3><p>Tickets sent digitally within minutes of payment confirmation via WhatsApp.</p></div>
+    <div class="tcard"><div class="tiw">💬</div><h3>Personal Support</h3><p>Real human support over WhatsApp. No bots, no queues — direct &amp; instant.</p></div>
+    <div class="tcard"><div class="tiw">🔐</div><h3>6 Crypto Options</h3><p>BTC, ETH, USDT, BNB, SOL &amp; more accepted. Secure, transparent transactions.</p></div>
+  </div>
+</div>
+
+<div class="gold-bar"></div>
+
+<!-- TESTIMONIALS -->
+<div class="testi-sec">
+  <div class="sh"><div class="sl">Reviews</div><h2 class="st">What <span class="ga">Buyers</span> Say</h2></div>
+  <div class="testi-grid">
+    <div class="testi-c"><div class="stars">★★★★★</div><p class="tt">"Got my Brazil vs Mexico tickets within 20 minutes of payment. Absolutely seamless. Highly recommend TrueTicket."</p><div class="tau"><div class="av">RK</div><div><div class="an">Rafael K.</div><div class="al">São Paulo, Brazil</div></div></div></div>
+    <div class="testi-c"><div class="stars">★★★★★</div><p class="tt">"Skeptical at first but the WhatsApp support was incredible. Tickets scanned perfectly at the gate. Will be back for the final!"</p><div class="tau"><div class="av">MA</div><div><div class="an">Marco A.</div><div class="al">Milan, Italy</div></div></div></div>
+    <div class="testi-c"><div class="stars">★★★★★</div><p class="tt">"VIP seats for the semi-final at MetLife. The view was unreal. TrueTicket delivered exactly as promised, zero stress."</p><div class="tau"><div class="av">JL</div><div><div class="an">James L.</div><div class="al">New York, USA</div></div></div></div>
+  </div>
+</div>
+
+<div class="dg"></div>
+
+<!-- CRYPTO PAYMENT -->
+<section id="payment" class="crypto-sec">
+  <div class="sh"><div class="sl">Payment Options</div><h2 class="st">Pay With <span class="ga">Crypto</span></h2><p class="ss">Send to any address below — then confirm on WhatsApp</p></div>
+  <div class="crypto-grid" id="cgrid"></div>
+  <div class="pnbox">
+    <span class="pnicon">⚠️</span>
+    <div class="pntxt"><strong>How to complete your purchase:</strong> Send crypto payment to any address above, screenshot your transaction, then send it to us on WhatsApp at <strong>+1 (205) 609 0495</strong>. Your ticket will be confirmed and delivered within minutes.</div>
+  </div>
+  <a href="#" onclick="openWA('Hi, I want to confirm my crypto payment for a World Cup ticket')" class="pwabtn">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Confirm Payment on WhatsApp
+  </a>
+</section>
+
+<div class="gold-bar"></div>
+
+<!-- FAQ -->
+<section id="faq" class="faq-sec">
+  <div class="sh"><div class="sl">FAQ</div><h2 class="st">Common <span class="ga">Questions</span></h2></div>
+  <div class="faq-list" id="faqlist"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft">
+    <div>
+      <div class="logo" style="color:#fff;"><span style="color:var(--green3)">True</span><span style="color:var(--green3)">Ticket</span><span style="color:var(--gold3);font-family:'Bebas Neue',sans-serif;font-size:25px;">.</span><span style="color:rgba(255,255,255,.3);font-family:'Bebas Neue',sans-serif;font-size:17px;">shop</span></div>
+      <p class="fd">The most trusted resale source for FIFA World Cup 2026 tickets. Fast delivery. Human support. Verified every time.</p>
+    </div>
+    <div class="fc"><h4>Navigation</h4><a href="#tickets">Browse Tickets</a><a href="#payment">Payment Guide</a><a href="#faq">FAQ</a></div>
+    <div class="fc"><h4>Contact</h4><a href="#" onclick="openWA('Hi, I want to buy a World Cup ticket')">WhatsApp: +1 (205) 609 0495</a><a href="mailto:info@trueticket.shop">info@trueticket.shop</a></div>
+  </div>
+  <div class="fb2">
+    <p>© 2026 TrueTicket.shop — All rights reserved</p>
+    <p class="disc">TrueTicket.shop is an independent ticket resale service. Not affiliated with FIFA or any official tournament body.</p>
+  </div>
+</footer>
+
+</div>
+
+<!-- WA FLOAT -->
+<div class="wa-float" id="waf">
+  <div class="wab">Need help? <span>Chat now!</span></div>
+  <a href="#" onclick="openWA('Hi, I want to buy a World Cup ticket')" class="wafloat-btn">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <div class="wan">1</div>
+  </a>
+</div>
+
+<!-- MODAL -->
+<div class="mo" id="mo" onclick="cModal(event)">
+  <div class="modal">
+    <button class="mcl" onclick="document.getElementById('mo').classList.remove('open')">+</button>
+    <div class="mtl"></div>
+    <h3>Complete Your Order</h3>
+    <p class="mm2" id="mname">Argentina vs France — VIP</p>
+    <div class="mstep"><strong>Step 1:</strong> Click below to open WhatsApp and tell us which ticket you want.</div>
+    <div class="mstep"><strong>Step 2:</strong> Send crypto payment to our address (see Payment section).</div>
+    <div class="mstep"><strong>Step 3:</strong> Send payment screenshot on WhatsApp. Ticket delivered within minutes!</div>
+    <a href="#" id="mwalink" class="mwabtn">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Continue on WhatsApp
+    </a>
+  </div>
+</div>
+
+<script>
+const WA='12056090495';
+
+// CRYPTO
+const cryptos=[
+  {name:'Bitcoin',net:'BTC Network',icon:'₿',cls:'cl-btc',addr:'bc1qzx3sca5th8dcu9h006jwny47aqzuc3jyqpy4js'},
+  {name:'Ethereum',net:'ERC20 Network',icon:'Ξ',cls:'cl-eth',addr:'0xBb81dCdE34b9FBCB29Ffd927D76032372d1D7516'},
+  {name:'USDT',net:'Tron TRC20',icon:'₮',cls:'cl-utrc',addr:'TGmTL6abkFjBp1mr9sJDYoXvHYcyDsvKZw'},
+  {name:'USDT',net:'BNB BEP20',icon:'₮',cls:'cl-ubnb',addr:'0xBb81dCdE34b9FBCB29Ffd927D76032372d1D7516'},
+  {name:'BNB',net:'BEP20 Network',icon:'B',cls:'cl-bnb',addr:'0xBb81dCdE34b9FBCB29Ffd927D76032372d1D7516'},
+  {name:'Solana',net:'SOL Network',icon:'◎',cls:'cl-sol',addr:'AC9jdveexNmGJgXzPgg9YrctHvib2V1wib89YRdeZ1wH'},
+];
+document.getElementById('cgrid').innerHTML=cryptos.map(c=>`
+  <div class="cc">
+    <div class="cch">
+      <div class="clogo ${c.cls}">${c.icon}</div>
+      <div><div class="cname">${c.name}</div><div class="cnet">${c.net}</div></div>
+    </div>
+    <div class="caw">
+      <span class="cat">${c.addr}</span>
+      <button class="copybtn" onclick="copyA('${c.addr}',this)">Copy</button>
+    </div>
+  </div>`).join('');
+
+// TICKETS
+const tickets=[
+  {id:1,match:'Brazil vs Germany',date:'2026-06-18T18:00:00',stadium:'MetLife Stadium',city:'East Rutherford, NJ',category:'VIP',cat:'vip',price:1500,qty:3,stage:'group',urg:Date.now()+7200000},
+  {id:2,match:'Argentina vs France',date:'2026-06-22T20:00:00',stadium:'SoFi Stadium',city:'Los Angeles, CA',category:'Category 1',cat:'cat1',price:850,qty:6,stage:'group',urg:Date.now()+18000000},
+  {id:3,match:'England vs Spain',date:'2026-06-25T17:00:00',stadium:'AT&T Stadium',city:'Arlington, TX',category:'Category 2',cat:'cat2',price:420,qty:12,stage:'group',urg:Date.now()+86400000},
+  {id:4,match:'Morocco vs Portugal',date:'2026-06-28T20:00:00',stadium:"Levi's Stadium",city:'Santa Clara, CA',category:'VIP',cat:'vip',price:1800,qty:2,stage:'group',urg:Date.now()+3600000},
+  {id:5,match:'Round of 16 — Match A',date:'2026-07-04T16:00:00',stadium:'Gillette Stadium',city:'Foxborough, MA',category:'Category 1',cat:'cat1',price:650,qty:8,stage:'knockout',urg:Date.now()+172800000},
+  {id:6,match:'Quarterfinal — Match B',date:'2026-07-10T20:00:00',stadium:'Rose Bowl',city:'Pasadena, CA',category:'Category 1',cat:'cat1',price:1100,qty:4,stage:'knockout',urg:Date.now()+5400000},
+  {id:7,match:'Semi-Final — New York',date:'2026-07-14T19:00:00',stadium:'MetLife Stadium',city:'East Rutherford, NJ',category:'VIP',cat:'vip',price:2500,qty:2,stage:'knockout',urg:Date.now()+9000000},
+  {id:8,match:'FIFA World Cup Final',date:'2026-07-19T18:00:00',stadium:'MetLife Stadium',city:'East Rutherford, NJ',category:'VIP',cat:'vip',price:4500,qty:1,stage:'final',urg:Date.now()+3000000},
+  {id:9,match:'FIFA World Cup Final',date:'2026-07-19T18:00:00',stadium:'MetLife Stadium',city:'East Rutherford, NJ',category:'Category 1',cat:'cat1',price:2200,qty:3,stage:'final',urg:Date.now()+3000000},
+  {id:10,match:'Japan vs Mexico',date:'2026-06-20T14:00:00',stadium:'Estadio Azteca',city:'Mexico City',category:'Category 2',cat:'cat2',price:280,qty:15,stage:'group',urg:Date.now()+259200000},
+  {id:11,match:'USA vs England',date:'2026-06-23T20:00:00',stadium:'AT&T Stadium',city:'Arlington, TX',category:'Category 1',cat:'cat1',price:750,qty:5,stage:'group',urg:Date.now()+43200000},
+  {id:12,match:'Semi-Final — Los Angeles',date:'2026-07-15T19:00:00',stadium:'Rose Bowl',city:'Pasadena, CA',category:'Category 2',cat:'cat2',price:900,qty:7,stage:'knockout',urg:Date.now()+21600000},
+];
+const WASVG=`<svg class="wsv" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`;
+
+let af='all';
+function renderT(f){
+  const list=f==='all'?tickets:f==='vip'?tickets.filter(t=>t.cat==='vip'):tickets.filter(t=>t.stage===f);
+  document.getElementById('tgrid').innerHTML=list.map(t=>{
+    const lq=t.qty<=3;
+    const bc=t.cat==='vip'?'bvip':t.cat==='cat1'?'bc1':t.cat==='cat2'?'bc2':'bc3';
+    const qc=t.qty===1?'qc':t.qty<=3?'qw':'qo';
+    const d=new Date(t.date);
+    const ds=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+    const ts=d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+    return `<div class="tc${lq?' lq':''}" data-id="${t.id}">
+      <div class="ct">
+        <span class="cb-badge ${bc}">${t.category}</span>
+        <div class="mn">${t.match}</div>
+        <div class="mm"><span class="mi">📅 ${ds} · ${ts}</span><span class="mi">🏟️ ${t.stadium}</span><span class="mi">📍 ${t.city}</span></div>
+      </div>
+      <div class="cb">
+        <div class="sr">
+          <span class="ql ${qc}">${t.qty===1?'⚠️ Last ticket!':t.qty<=3?'🔥 Only '+t.qty+' left':t.qty+' available'}</span>
+          <div style="text-align:right"><span class="cd cdo" id="cd-${t.id}">--:--:--</span><span class="cdl">time left</span></div>
+        </div>
+        <div class="pr">
+          <div class="price"><span class="cur">$</span>${t.price.toLocaleString()}</div>
+          <div class="pright"><div class="pper">per ticket</div><div class="pcryp">Crypto accepted</div></div>
+        </div>
+        <div class="cbtns">
+          <button class="bbuy" onclick="oModal(${t.id})">Buy Now</button>
+          <button class="bres" onclick="openWA('Hi, I want to reserve a World Cup ticket for ${t.match} — ${t.category}')">${WASVG} Reserve</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+renderT('all');
+
+function filterT(f,btn){af=f;document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderT(f);uCDs();}
+
+// COUNTDOWNS
+function pad(n){return String(n).padStart(2,'0');}
+function fmtCd(ms){if(ms<=0)return'00:00:00';const h=Math.floor(ms/3600000),m=Math.floor((ms%3600000)/60000),s=Math.floor((ms%60000)/1000);if(h>99){const d=Math.floor(h/24);return d+'d '+pad(h%24)+'h';}return pad(h)+':'+pad(m)+':'+pad(s);}
+function cdCls(ms){return ms<3600000?'cdc':ms<7200000?'cdw':'cdo';}
+function uCDs(){tickets.forEach(t=>{const el=document.getElementById('cd-'+t.id);if(!el)return;const r=t.urg-Date.now();el.textContent=fmtCd(r);el.className='cd '+cdCls(r);});}
+uCDs();setInterval(uCDs,1000);
+
+// TICKER
+const td=['🔥 World Cup Final — Last VIP ticket','✅ Sold: Argentina vs France VIP — 8 mins ago','⚡ Semi-Final NYC — 2 seats left','🏆 Brazil vs Germany — 3 VIP seats','🔥 Morocco vs Portugal — Selling fast!','✅ Confirmed: USA vs England Cat.1','⚡ Final Cat.1 — 3 remaining','🏆 Quarterfinal Rose Bowl — Limited'];
+document.getElementById('ticker').innerHTML=[...td,...td].map(t=>`<span class="ti"><span class="ti-sep">◆</span> ${t}</span>`).join('');
+
+// FAQ
+const faqs=[
+  {q:'Are tickets verified?',a:'Yes — every ticket sold through TrueTicket.shop is manually verified before delivery. We guarantee authenticity on every order.'},
+  {q:'How do I receive my ticket?',a:"Tickets are delivered digitally via WhatsApp within minutes of payment confirmation. You'll receive the ticket file and entry instructions."},
+  {q:'How do I confirm payment?',a:'After sending crypto, screenshot your transaction and send it to us on WhatsApp (+1 205 609 0495). We confirm and dispatch immediately.'},
+  {q:'Can I reserve without paying immediately?',a:"Yes — click Reserve via WhatsApp on any ticket. We'll hold your seat for up to 2 hours while you arrange payment."},
+  {q:'What if tickets sell out?',a:"Message us on WhatsApp to join our broadcast list. You'll be first to know when new inventory is added."},
+  {q:'What crypto do you accept?',a:'We accept Bitcoin (BTC), Ethereum (ETH), USDT TRC20, USDT BEP20, BNB, and Solana (SOL). Discuss other arrangements via WhatsApp for large orders.'},
+];
+document.getElementById('faqlist').innerHTML=faqs.map((f,i)=>`<div class="fi"><button class="fq" onclick="tFaq(${i},this)">${f.q}<span class="fch">+</span></button><div class="fa" id="fa-${i}">${f.a}</div></div>`).join('');
+function tFaq(i,btn){const a=document.getElementById('fa-'+i);const o=a.classList.contains('open');document.querySelectorAll('.fa').forEach(x=>x.classList.remove('open'));document.querySelectorAll('.fq').forEach(x=>x.classList.remove('open'));if(!o){a.classList.add('open');btn.classList.add('open');}}
+
+// MODAL
+function oModal(id){const t=tickets.find(x=>x.id===id);if(!t)return;document.getElementById('mname').textContent=`${t.match} — ${t.category} — $${t.price.toLocaleString()}`;document.getElementById('mwalink').onclick=(e)=>{e.preventDefault();openWA(`Hi, I want to buy a World Cup ticket for ${t.match} (${t.category}) — $${t.price}`);};document.getElementById('mo').classList.add('open');}
+function cModal(e){if(e.target.id==='mo')document.getElementById('mo').classList.remove('open');}
+
+// WHATSAPP
+function openWA(msg){window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,'_blank');return false;}
+
+// COPY
+function copyA(addr,btn){navigator.clipboard.writeText(addr).then(()=>{btn.textContent='Copied!';btn.style.background='var(--green)';btn.style.color='#fff';setTimeout(()=>{btn.textContent='Copy';btn.style.background='';btn.style.color='';},2000);});}
+
+// WA FLOAT
+window.addEventListener('scroll',()=>{if(window.scrollY>300)document.getElementById('waf').style.display='flex';});
+
+// PITCH FIELD LINE BACKGROUND
+(function(){
+  const canvas=document.getElementById('field-canvas');
+  const ctx=canvas.getContext('2d');
+  let W,H;
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+  resize();window.addEventListener('resize',()=>{resize();draw();});
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const lc=rgba=>{ ctx.strokeStyle=rgba; ctx.lineWidth=1; };
+
+    // Horizontal pitch lines
+    lc('rgba(26,122,60,0.055)');
+    const hLines=14;
+    for(let i=1;i<=hLines;i++){
+      const y=i*(H/(hLines+1));
+      ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();
+    }
+
+    // Vertical pitch lines
+    const vLines=10;
+    for(let i=1;i<=vLines;i++){
+      const x=i*(W/(vLines+1));
+      ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();
+    }
+
+    // Center circle
+    ctx.strokeStyle='rgba(26,122,60,0.065)';
+    ctx.lineWidth=1.5;
+    const cx=W/2,cy=H/2,r=Math.min(W,H)*0.14;
+    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke();
+
+    // Center small circle
+    ctx.beginPath();ctx.arc(cx,cy,r*0.1,0,Math.PI*2);ctx.stroke();
+
+    // Center line
+    ctx.strokeStyle='rgba(26,122,60,0.06)';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(0,cy);ctx.lineTo(W,cy);ctx.stroke();
+
+    // Outer border
+    ctx.strokeStyle='rgba(26,122,60,0.08)';ctx.lineWidth=2;
+    const p=18;ctx.strokeRect(p,p,W-p*2,H-p*2);
+
+    // Penalty areas
+    ctx.strokeStyle='rgba(26,122,60,0.055)';ctx.lineWidth=1;
+    const pw=W*0.32,ph=H*0.16;
+    ctx.strokeRect(cx-pw/2,0,pw,ph);
+    ctx.strokeRect(cx-pw*.25,0,pw*.5,ph*.55);
+    ctx.strokeRect(cx-pw/2,H-ph,pw,ph);
+    ctx.strokeRect(cx-pw*.25,H-ph*.55,pw*.5,ph*.55);
+
+    // Corner arcs
+    const cr=Math.min(W,H)*0.025;
+    [[0,0,0,Math.PI/2],[W,0,Math.PI/2,Math.PI],[0,H,3*Math.PI/2,2*Math.PI],[W,H,Math.PI,3*Math.PI/2]].forEach(([x,y,s,e])=>{
+      ctx.beginPath();ctx.arc(x,y,cr,s,e);ctx.stroke();
+    });
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
