@@ -258,20 +258,64 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
 .wan{position:absolute;top:-2px;right:-2px;width:15px;height:15px;background:var(--red);border-radius:50%;font-size:8.5px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;border:2px solid #fff;}
 
 /* MODAL */
-.mo{position:fixed;inset:0;background:rgba(13,26,15,.5);backdrop-filter:blur(6px);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .28s;}
+.mo{position:fixed;inset:0;background:rgba(13,26,15,.55);backdrop-filter:blur(6px);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .28s;}
 .mo.open{opacity:1;pointer-events:all;}
-.modal{background:#fff;border-radius:12px;padding:30px;max-width:440px;width:100%;position:relative;transform:translateY(12px);transition:transform .28s;box-shadow:0 24px 80px rgba(13,26,15,.2);}
+.modal{background:#fff;border-radius:14px;padding:28px 28px 26px;max-width:480px;width:100%;position:relative;transform:translateY(14px);transition:transform .28s;box-shadow:0 28px 90px rgba(13,26,15,.22);max-height:90vh;overflow-y:auto;}
 .mo.open .modal{transform:translateY(0);}
-.mcl{position:absolute;top:13px;right:15px;background:none;border:none;color:var(--mute2);font-size:20px;cursor:pointer;line-height:1;}
-.mcl:hover{color:var(--ink);}
-.mtl{width:32px;height:2px;background:linear-gradient(90deg,var(--g),var(--gold3));margin-bottom:14px;}
-.modal h3{font-family:"Playfair Display",serif;font-size:22px;margin-bottom:4px;color:var(--ink);}
-.mmatch{font-size:12px;color:var(--g);font-weight:600;margin-bottom:16px;}
-.mstep{background:var(--off);border-radius:5px;padding:10px 13px;margin-bottom:8px;font-size:12.5px;color:var(--mute);line-height:1.65;border:1px solid var(--bd);}
-.mstep strong{color:var(--ink);}
-.mwab{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;background:#25d366;color:#fff;font-weight:600;font-size:14px;padding:12px;border-radius:6px;border:none;cursor:pointer;margin-top:14px;font-family:"Inter",sans-serif;transition:background .2s;text-decoration:none;}
-.mwab:hover{background:#1da855;}
-.mwab svg{width:18px;height:18px;fill:#fff;}
+.mcl{position:absolute;top:13px;right:15px;background:none;border:none;color:var(--mute2);font-size:18px;cursor:pointer;line-height:1;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .15s;}
+.mcl:hover{background:var(--off);color:var(--ink);}
+.mtl{width:32px;height:2px;background:linear-gradient(90deg,var(--g),var(--gold3));margin-bottom:16px;}
+.modal h3{font-family:"Playfair Display",serif;font-size:20px;margin-bottom:3px;color:var(--ink);padding-right:30px;}
+.modal-eyebrow{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--g);margin-bottom:8px;}
+.modal-stadium{font-size:11.5px;color:var(--mute2);margin-bottom:18px;}
+
+/* SEAT GRID */
+.seat-grid{display:flex;flex-direction:column;gap:8px;margin-top:4px;}
+.seat-row{background:var(--off);border:1px solid var(--bd);border-radius:8px;padding:13px 14px;cursor:pointer;transition:all .18s;position:relative;overflow:hidden;}
+.seat-row:hover:not(.sold-out){border-color:var(--g2);background:#f0f7f2;transform:translateY(-1px);box-shadow:0 4px 16px rgba(26,110,54,.08);}
+.seat-row.sold-out{opacity:.65;cursor:not-allowed;}
+.seat-row-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
+.seat-name{font-size:13.5px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:7px;}
+.seat-badge{font-size:8.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:2px 7px;border-radius:2px;}
+.sb-vip{background:linear-gradient(135deg,var(--gold4),var(--gold3));color:#1a0c00;}
+.sb-premium{background:rgba(26,110,54,.1);color:var(--g);border:1px solid rgba(26,110,54,.2);}
+.sb-tunnel{background:linear-gradient(135deg,#1a0c00,#3a1e00);color:var(--gold4);}
+.sb-soldout{background:rgba(184,50,40,.1);color:var(--red);border:1px solid rgba(184,50,40,.2);}
+.seat-price{font-family:"Bebas Neue",sans-serif;font-size:22px;letter-spacing:.5px;color:var(--ink);}
+.seat-price .spu{font-size:12px;color:var(--mute2);font-family:"Inter",sans-serif;font-weight:400;}
+.seat-desc{font-size:11px;color:var(--mute);line-height:1.5;}
+.seat-avail{font-size:10.5px;font-weight:600;margin-top:5px;}
+.sa-hot{color:var(--red);}
+.sa-warn{color:var(--amb);}
+.sa-ok{color:var(--g);}
+.sa-sold{color:var(--mute2);text-decoration:line-through;}
+.seat-row-stripe{position:absolute;left:0;top:0;bottom:0;width:3px;}
+.stripe-vip{background:linear-gradient(180deg,var(--gold3),var(--gold4));}
+.stripe-cat1{background:var(--g);}
+.stripe-cat2{background:var(--g2);}
+.stripe-cat3{background:var(--mute2);}
+.stripe-cat4{background:#aaa;}
+.stripe-tunnel{background:linear-gradient(180deg,var(--gold3),#c96a00);}
+.stripe-sold{background:var(--red);}
+.tunnel-tag{display:inline-flex;align-items:center;gap:4px;font-size:9.5px;font-weight:600;color:#c96a00;background:rgba(201,106,0,.08);border:1px solid rgba(201,106,0,.18);border-radius:3px;padding:2px 7px;margin-top:5px;}
+
+/* STEP 2 */
+.modal-back{background:none;border:none;color:var(--mute);font-size:12px;font-weight:500;cursor:pointer;padding:0;margin-bottom:14px;font-family:"Inter",sans-serif;display:flex;align-items:center;gap:4px;transition:color .15s;}
+.modal-back:hover{color:var(--g);}
+.m2-seat-chosen{background:linear-gradient(135deg,rgba(26,110,54,.06),rgba(26,110,54,.02));border:1px solid rgba(26,110,54,.14);border-radius:7px;padding:10px 13px;font-size:12.5px;color:var(--g);font-weight:600;margin-bottom:12px;}
+.m2-price-row{display:flex;align-items:baseline;gap:6px;margin-bottom:16px;}
+.m2-price{font-family:"Bebas Neue",sans-serif;font-size:40px;letter-spacing:1px;color:var(--ink);}
+.m2-ppt{font-size:12px;color:var(--mute2);}
+.m2-hint{font-size:12px;color:var(--mute);margin-bottom:12px;}
+.m2-btns{display:flex;flex-direction:column;gap:10px;}
+.m2-crypto,.m2-wa{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:8px;border:1px solid var(--bd);background:var(--off);cursor:pointer;font-family:"Inter",sans-serif;text-align:left;transition:all .18s;width:100%;}
+.m2-crypto:hover{border-color:var(--g);background:#f0f7f2;transform:translateY(-1px);}
+.m2-wa:hover{border-color:#25d366;background:#f0fff5;transform:translateY(-1px);}
+.m2-btn-icon{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;flex-shrink:0;}
+.m2-crypto .m2-btn-icon{background:linear-gradient(135deg,#f7931a,#e8b822);color:#fff;}
+.m2-wa .m2-btn-icon{background:#25d366;color:#fff;}
+.m2-crypto strong,.m2-wa strong{display:block;font-size:14px;color:var(--ink);font-weight:600;}
+.m2-crypto small,.m2-wa small{display:block;font-size:11px;color:var(--mute);margin-top:1px;font-weight:400;}
 
 @media(max-width:900px){#hero{grid-template-columns:1fr;padding-top:90px;}.hero-right{display:none;}.nl{display:none;}.footballer{display:none;}}
 @media(max-width:600px){.hero-title{font-size:48px;}.tgrid{grid-template-columns:1fr;}.cgrid{grid-template-columns:1fr;}.cbtns{flex-direction:column;}.ss-in{flex-direction:column;}.ss-stats{flex-wrap:wrap;justify-content:center;}.sst{padding:12px 20px;border-top:1px solid rgba(255,255,255,.06);border-left:none;}.sst:first-child{border-top:none;}.ft{flex-direction:column;}}
@@ -615,7 +659,7 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
       <p class="fdesc">Verified resale tickets for the 2026 FIFA World Cup. Fast delivery, real support, every time.</p>
     </div>
     <div class="fcol"><h4>Navigation</h4><a href="#tickets">Browse Tickets</a><a href="#payment">Payment</a><a href="#faq">FAQ</a></div>
-    <div class="fcol"><h4>Contact</h4><a href="#" onclick="openWA('Hi, I want to buy a World Cup ticket')">WhatsApp: +1 (205) 609 0495</a><a href="mailto:info@trueticket.shop">info@trueticket.shop</a></div>
+    <div class="fcol"><h4>Contact</h4><a href="#" onclick="openWA('Hi, I want to buy a World Cup ticket')">WhatsApp: +1 (205) 609 0495</a><a href="/cdn-cgi/l/email-protection#3c55525a537c484e495948555f575948124f54534c"><span class="__cf_email__" data-cfemail="066f6860694672747363726f656d637228756e6976">[email&#160;protected]</span></a></div>
   </div>
   <div class="fb2">
     <p>© 2026 TrueTicket.shop — All rights reserved</p>
@@ -635,22 +679,46 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
 
 <!-- MODAL -->
 <div class="mo" id="mo" onclick="cModal(event)">
-  <div class="modal">
-    <button class="mcl" onclick="document.getElementById('mo').classList.remove('open')">+</button>
+  <div class="modal" id="modal-inner">
+    <button class="mcl" onclick="document.getElementById('mo').classList.remove('open')">✕</button>
     <div class="mtl"></div>
-    <h3>Complete Your Order</h3>
-    <p class="mmatch" id="mname"></p>
-    <div class="mstep"><strong>Step 1:</strong> Click below to open WhatsApp and confirm your ticket.</div>
-    <div class="mstep"><strong>Step 2:</strong> Send crypto payment to our address (see Payment section).</div>
-    <div class="mstep"><strong>Step 3:</strong> Send payment screenshot on WhatsApp. Ticket delivered in minutes.</div>
-    <a href="#" id="mwalink" class="mwab">
-      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Continue on WhatsApp
-    </a>
+
+    <!-- STEP 1: Seat Selection -->
+    <div id="modal-step1">
+      <div class="modal-eyebrow" id="m-eyebrow">SELECT YOUR POSITION</div>
+      <h3 id="mname" style="margin-bottom:4px;"></h3>
+      <p class="modal-stadium" id="m-stadium"></p>
+      <div class="seat-grid" id="seat-grid"></div>
+    </div>
+
+    <!-- STEP 2: Payment Choice -->
+    <div id="modal-step2" style="display:none;">
+      <button class="modal-back" onclick="showStep1()">← Back to seats</button>
+      <div class="modal-eyebrow">CONFIRM & PAY</div>
+      <h3 id="m2-match" style="margin-bottom:4px;"></h3>
+      <div class="m2-seat-chosen" id="m2-seat-chosen"></div>
+      <div class="m2-price-row">
+        <span class="m2-price" id="m2-price"></span>
+        <span class="m2-ppt">per ticket</span>
+      </div>
+      <p class="m2-hint">Choose how you'd like to proceed:</p>
+      <div class="m2-btns">
+        <button class="m2-crypto" id="m2-crypto-btn">
+          <span class="m2-btn-icon">₿</span>
+          <span><strong>Pay with Crypto</strong><small>BTC · ETH · USDT · BNB · SOL</small></span>
+        </button>
+        <button class="m2-wa" id="m2-wa-btn">
+          <span class="m2-btn-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </span>
+          <span><strong>Negotiate Price</strong><small>Chat directly on WhatsApp</small></span>
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const WA='12056090495';
 const cryptos=[
   {name:'Bitcoin',net:'BTC Network',icon:'\u20BF',cls:'lbtc',addr:'bc1qzx3sca5th8dcu9h006jwny47aqzuc3jyqpy4js'},
@@ -732,12 +800,212 @@ const faqs=[
 ];
 document.getElementById('flist').innerHTML=faqs.map((f,i)=>`<div class="fi"><button class="fq" onclick="tFaq(${i},this)">${f.q}<span class="fch">+</span></button><div class="fa" id="fa-${i}">${f.a}</div></div>`).join('');
 function tFaq(i,b){const a=document.getElementById('fa-'+i);const o=a.classList.contains('open');document.querySelectorAll('.fa').forEach(x=>x.classList.remove('open'));document.querySelectorAll('.fq').forEach(x=>x.classList.remove('open'));if(!o){a.classList.add('open');b.classList.add('open');}}
-function oModal(id){const t=tickets.find(x=>x.id===id);if(!t)return;document.getElementById('mname').textContent=`${t.match} · ${t.category} · $${t.price.toLocaleString()}`;document.getElementById('mwalink').onclick=(e)=>{e.preventDefault();openWA(`Hi, I want to buy a World Cup ticket for ${t.match} (${t.category}) — $${t.price}`);};document.getElementById('mo').classList.add('open');}
+// ─── SEAT DEFINITIONS PER TICKET ───────────────────────────────────────────
+// Each ticket has curated seat positions. Some have tunnel access (random),
+// some positions sold out, varying qty. Prices adjusted per position.
+const seatPlans = {
+  // Brazil vs Germany — VIP — 4 positions, tunnel access available
+  1: {
+    tunnel: true,
+    seats: [
+      { name:'Category 1 — Pitchside Lower Tier', badge:'Premium', stripe:'cat1', price:5290, qty:3, desc:'Central lower-tier sideline. Closest seats to the action.', avail:'ok' },
+      { name:'Front Category 1 — Row A', badge:'Premium', stripe:'cat1', price:5890, qty:2, desc:'Absolute front row of Cat 1 block. Unobstructed pitch-level view.', avail:'warn' },
+      { name:'Category 2 — Lower Corner', badge:'', stripe:'cat2', price:3800, qty:6, desc:'Lower-tier corner section. Wide diagonal view of the full pitch.', avail:'ok' },
+      { name:'🏟 Tunnel Club Access', badge:'Tunnel', stripe:'tunnel', price:7400, qty:1, desc:'Watch players emerge from the tunnel. Pre-match pitch access included.', avail:'hot' },
+    ]
+  },
+  // Argentina vs France — Cat1 — 3 positions, no tunnel
+  2: {
+    tunnel: false,
+    seats: [
+      { name:'Category 1 — Sideline Central', badge:'Premium', stripe:'cat1', price:4180, qty:6, desc:'Lower-tier prime sideline. Some of the best seats in SoFi Stadium.', avail:'ok' },
+      { name:'Category 2 — Upper Sideline', badge:'', stripe:'cat2', price:2950, qty:8, desc:'Upper-tier sideline. Elevated panoramic view.', avail:'ok' },
+      { name:'Category 3 — Behind the Goal', badge:'', stripe:'cat3', price:1990, qty:4, desc:'Upper end-zone view. Electric atmosphere behind the goal.', avail:'warn' },
+    ]
+  },
+  // England vs Spain — Cat2 — 4 positions, tunnel sold out
+  3: {
+    tunnel: true,
+    seats: [
+      { name:'Category 1 — Lower Sideline', badge:'Premium', stripe:'cat1', price:4200, qty:0, desc:'Central lower-tier sideline. Sold out for this fixture.', avail:'sold' },
+      { name:'Front Category 2 — Lower Corner', badge:'', stripe:'cat2', price:3050, qty:12, desc:'Front rows of corner block, lower tier. Great diagonal view.', avail:'ok' },
+      { name:'Category 3 — Upper Tier', badge:'', stripe:'cat3', price:1890, qty:5, desc:'Upper-tier behind the goal. Atmospheric and budget-friendly.', avail:'warn' },
+      { name:'🏟 Tunnel Club Access', badge:'Tunnel', stripe:'tunnel', price:5900, qty:0, desc:'Player tunnel access. Sold out — only 2 remaining last week.', avail:'sold' },
+    ]
+  },
+  // Morocco vs Portugal — VIP — 3 positions
+  4: {
+    tunnel: false,
+    seats: [
+      { name:'VIP — Pitchside Lounge', badge:'VIP', stripe:'vip', price:5800, qty:2, desc:'Shared premium lounge with direct pitch-side seating access.', avail:'hot' },
+      { name:'Private Suite — Corporate Box', badge:'VIP', stripe:'vip', price:8200, qty:1, desc:'Private luxury suite. Catered, air-conditioned, exclusive.', avail:'hot' },
+      { name:'Category 1 — Lower Sideline', badge:'Premium', stripe:'cat1', price:3900, qty:4, desc:'Prime lower-tier central seats. Levi\'s Stadium west stand.', avail:'warn' },
+    ]
+  },
+  // Round of 16 — Cat1 — 3 positions
+  5: {
+    tunnel: false,
+    seats: [
+      { name:'Category 1 — Sideline Lower', badge:'Premium', stripe:'cat1', price:3290, qty:8, desc:'Lower-tier sideline in Gillette Stadium. Knockout match atmosphere.', avail:'ok' },
+      { name:'Category 2 — Upper Sideline', badge:'', stripe:'cat2', price:2200, qty:12, desc:'Elevated sideline view, upper tier.', avail:'ok' },
+      { name:'Category 4 — Upper End Zone', badge:'', stripe:'cat4', price:1350, qty:6, desc:'Highest tier. Budget option. Great atmosphere end zone.', avail:'ok' },
+    ]
+  },
+  // Quarterfinal — Cat1 — 4 positions, tunnel available
+  6: {
+    tunnel: true,
+    seats: [
+      { name:'Category 1 — Front Sideline', badge:'Premium', stripe:'cat1', price:6100, qty:4, desc:'Prime Rose Bowl lower-tier. Legendary stadium, legendary match.', avail:'warn' },
+      { name:'Front Category 1 — Row B', badge:'Premium', stripe:'cat1', price:6800, qty:2, desc:'Row B, Cat 1 section. Virtually pitchside at the Rose Bowl.', avail:'hot' },
+      { name:'Category 2 — Lower Corner', badge:'', stripe:'cat2', price:4100, qty:6, desc:'Corner block with full pitch view. Lower tier.', avail:'ok' },
+      { name:'🏟 Tunnel Club Access', badge:'Tunnel', stripe:'tunnel', price:9200, qty:2, desc:'Exclusive tunnel-side access. See players up close pre-match.', avail:'hot' },
+    ]
+  },
+  // Semi-Final NYC — VIP — 4 positions
+  7: {
+    tunnel: true,
+    seats: [
+      { name:'VIP — Pitchside Lounge', badge:'VIP', stripe:'vip', price:8750, qty:2, desc:'Premium shared lounge. Pitchside view at MetLife. Semi-final energy.', avail:'hot' },
+      { name:'Private Suite — Level 3', badge:'VIP', stripe:'vip', price:12000, qty:1, desc:'Exclusive MetLife suite. Semi-Final. Fully catered, private.', avail:'hot' },
+      { name:'Category 1 — Lower Sideline', badge:'Premium', stripe:'cat1', price:5400, qty:0, desc:'Sold out. Lower sideline for the NYC Semi-Final.', avail:'sold' },
+      { name:'🏟 Tunnel Club Access', badge:'Tunnel', stripe:'tunnel', price:14500, qty:1, desc:'Once-in-a-lifetime tunnel access. Semi-Final at MetLife.', avail:'hot' },
+    ]
+  },
+  // Final VIP — 4 positions
+  8: {
+    tunnel: true,
+    seats: [
+      { name:'VIP — Pitchside Lounge', badge:'VIP', stripe:'vip', price:12800, qty:1, desc:'The Final. The ultimate seat. Pitchside lounge at MetLife Stadium.', avail:'hot' },
+      { name:'FIFA Pavilion — Hospitality', badge:'VIP', stripe:'vip', price:18500, qty:0, desc:'Exclusive FIFA Pavilion access. Sold out.', avail:'sold' },
+      { name:'Private Suite — The Final', badge:'VIP', stripe:'vip', price:22000, qty:1, desc:'Full private suite. World Cup Final. Once every four years.', avail:'hot' },
+      { name:'🏟 Tunnel Club — The Final', badge:'Tunnel', stripe:'tunnel', price:26000, qty:1, desc:'Watch the finalists walk out. Tunnel access at the World Cup Final.', avail:'hot' },
+    ]
+  },
+  // Final Cat1 — 3 positions
+  9: {
+    tunnel: false,
+    seats: [
+      { name:'Category 1 — Lower Sideline', badge:'Premium', stripe:'cat1', price:9400, qty:3, desc:'Best non-VIP seats for the Final. Central lower-tier MetLife.', avail:'warn' },
+      { name:'Front Category 1 — Row C', badge:'Premium', stripe:'cat1', price:10800, qty:1, desc:'Row C front of Cat 1. As close as it gets without VIP.', avail:'hot' },
+      { name:'Category 2 — Lower Corner', badge:'', stripe:'cat2', price:6900, qty:0, desc:'Sold out. Lower corner view for the Final.', avail:'sold' },
+    ]
+  },
+  // Japan vs Mexico — Cat2 — 3 positions
+  10: {
+    tunnel: false,
+    seats: [
+      { name:'Category 2 — Lower Sideline', badge:'', stripe:'cat2', price:2380, qty:15, desc:'Good central lower-tier view at Estadio Azteca.', avail:'ok' },
+      { name:'Category 3 — Upper Behind Goal', badge:'', stripe:'cat3', price:1600, qty:10, desc:'Upper end-zone. Electric Azteca atmosphere.', avail:'ok' },
+      { name:'Easy Access Seating', badge:'', stripe:'cat3', price:1750, qty:4, desc:'Accessible seating area near the concourse level. Extra comfort.', avail:'warn' },
+    ]
+  },
+  // USA vs England — Cat1 — 4 positions, tunnel sold out
+  11: {
+    tunnel: true,
+    seats: [
+      { name:'Category 1 — Lower Sideline', badge:'Premium', stripe:'cat1', price:4650, qty:5, desc:'Central lower-tier at AT&T Stadium. USA vs England — huge game.', avail:'warn' },
+      { name:'Front Category 1 — Row A', badge:'Premium', stripe:'cat1', price:5200, qty:2, desc:'Front row Cat 1. The closest you can be to the pitch.', avail:'hot' },
+      { name:'Category 2 — Upper Sideline', badge:'', stripe:'cat2', price:3100, qty:8, desc:'Elevated sideline with full pitch panoramic.', avail:'ok' },
+      { name:'🏟 Tunnel Club Access', badge:'Tunnel', stripe:'tunnel', price:7800, qty:0, desc:'Tunnel access — sold out for this fixture.', avail:'sold' },
+    ]
+  },
+  // Semi-Final LA — Cat2 — 4 positions
+  12: {
+    tunnel: false,
+    seats: [
+      { name:'Category 1 — Lower Sideline', badge:'Premium', stripe:'cat1', price:7200, qty:2, desc:'Rose Bowl lower-tier. Semi-Final — premium spot.', avail:'hot' },
+      { name:'Category 2 — Lower Sideline', badge:'', stripe:'cat2', price:5490, qty:7, desc:'Upper sideline with sweeping Rose Bowl view.', avail:'ok' },
+      { name:'Category 2 — Corner Lower', badge:'', stripe:'cat2', price:4800, qty:4, desc:'Corner section, lower tier. Good diagonal view.', avail:'warn' },
+      { name:'Category 4 — Upper Deck End Zone', badge:'', stripe:'cat4', price:2900, qty:6, desc:'Top-deck behind the goal. Most affordable Semi-Final seats.', avail:'ok' },
+    ]
+  },
+};
+
+let currentTicket = null;
+let currentSeat = null;
+
+function showStep1(){
+  document.getElementById('modal-step1').style.display='block';
+  document.getElementById('modal-step2').style.display='none';
+}
+
+function oModal(id){
+  const t = tickets.find(x=>x.id===id);
+  if(!t) return;
+  currentTicket = t;
+  currentSeat = null;
+
+  const plan = seatPlans[id] || { tunnel:false, seats:[] };
+  const d = new Date(t.date);
+  const ds = d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+
+  document.getElementById('mname').textContent = t.match;
+  document.getElementById('m-eyebrow').textContent = 'SELECT YOUR POSITION';
+  document.getElementById('m-stadium').textContent = `📅 ${ds}  ·  🏟 ${t.stadium}  ·  📍 ${t.city}`;
+
+  const grid = document.getElementById('seat-grid');
+  grid.innerHTML = plan.seats.map((s,i) => {
+    const sold = s.avail === 'sold';
+    const availText = sold
+      ? '⊘ Sold Out'
+      : s.qty===1 ? '⚠ Last ticket!'
+      : s.qty<=2 ? `🔥 Only ${s.qty} remaining`
+      : s.qty<=5 ? `${s.qty} available`
+      : `${s.qty} available`;
+    const availCls = sold?'sa-sold':s.avail==='hot'?'sa-hot':s.avail==='warn'?'sa-warn':'sa-ok';
+    const badgeCls = s.badge==='VIP'?'sb-vip':s.badge==='Tunnel'?'sb-tunnel':s.badge==='Premium'?'sb-premium':'';
+    const hasTunnel = s.badge==='Tunnel';
+    return `<div class="seat-row${sold?' sold-out':''}" ${sold?'':'onclick="selectSeat('+i+')"'} data-idx="${i}">
+      <div class="seat-row-stripe stripe-${s.stripe}"></div>
+      <div style="padding-left:10px;">
+        <div class="seat-row-top">
+          <div class="seat-name">
+            ${hasTunnel?'':''}${s.name.replace('🏟 ','')}
+            ${s.badge?`<span class="seat-badge ${badgeCls}">${sold&&s.badge==='Tunnel'?'TUNNEL':s.badge}</span>`:''}
+            ${sold?'<span class="seat-badge sb-soldout">SOLD OUT</span>':''}
+          </div>
+          <div class="seat-price"><span class="spu">$</span>${s.price.toLocaleString()}</div>
+        </div>
+        <div class="seat-desc">${s.desc}</div>
+        ${hasTunnel&&!sold?'<div class="tunnel-tag">⚽ Tunnel Access · Player walkout included</div>':''}
+        <div class="seat-avail ${availCls}">${availText}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  showStep1();
+  document.getElementById('mo').classList.add('open');
+}
+
+function selectSeat(idx){
+  if(!currentTicket) return;
+  const plan = seatPlans[currentTicket.id];
+  if(!plan) return;
+  const seat = plan.seats[idx];
+  if(!seat || seat.avail==='sold') return;
+  currentSeat = seat;
+
+  document.getElementById('m2-match').textContent = currentTicket.match;
+  document.getElementById('m2-seat-chosen').textContent = `📌 ${seat.name}`;
+  document.getElementById('m2-price').textContent = `$${seat.price.toLocaleString()}`;
+
+  const cryptoBtn = document.getElementById('m2-crypto-btn');
+  const waBtn = document.getElementById('m2-wa-btn');
+
+  cryptoBtn.onclick = () => {
+    document.getElementById('mo').classList.remove('open');
+    document.getElementById('payment').scrollIntoView({behavior:'smooth'});
+  };
+  waBtn.onclick = () => {
+    openWA(`Hi, I'd like to negotiate a ticket for ${currentTicket.match} — ${seat.name} — Listed at $${seat.price.toLocaleString()}`);
+  };
+
+  document.getElementById('modal-step1').style.display='none';
+  document.getElementById('modal-step2').style.display='block';
+}
+
 function cModal(e){if(e.target.id==='mo')document.getElementById('mo').classList.remove('open');}
 function openWA(msg){window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,"_blank");return false;}
 function cpA(addr,btn){navigator.clipboard.writeText(addr).then(()=>{btn.textContent='Copied';btn.style.background='var(--g)';btn.style.color='#fff';setTimeout(()=>{btn.textContent='Copy';btn.style.background='';btn.style.color='';},2000);});}
 window.addEventListener('scroll',()=>{if(window.scrollY>300)document.getElementById('waf').style.display='flex';});
-(function(){const canvas=document.getElementById('fc');const ctx=canvas.getContext('2d');let W,H;function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}resize();window.addEventListener('resize',()=>{resize();draw();});function draw(){ctx.clearRect(0,0,W,H);ctx.strokeStyle='rgba(26,110,54,0.046)';ctx.lineWidth=1;for(let i=1;i<=13;i++){const y=i*(H/14);ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}for(let i=1;i<=9;i++){const x=i*(W/10);ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}ctx.strokeStyle='rgba(26,110,54,0.058)';ctx.lineWidth=1.2;const cx=W/2,cy=H/2,r=Math.min(W,H)*.14;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.arc(cx,cy,r*.08,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.moveTo(0,cy);ctx.lineTo(W,cy);ctx.stroke();ctx.strokeStyle='rgba(26,110,54,0.07)';ctx.lineWidth=1.5;ctx.strokeRect(16,16,W-32,H-32);ctx.strokeStyle='rgba(26,110,54,0.042)';ctx.lineWidth=1;const pw=W*.3,ph=H*.15;ctx.strokeRect(cx-pw/2,0,pw,ph);ctx.strokeRect(cx-pw*.22,0,pw*.44,ph*.5);ctx.strokeRect(cx-pw/2,H-ph,pw,ph);ctx.strokeRect(cx-pw*.22,H-ph*.5,pw*.44,ph*.5);const cr=Math.min(W,H)*.022;[[0,0,0,Math.PI/2],[W,0,Math.PI/2,Math.PI],[0,H,Math.PI*1.5,Math.PI*2],[W,H,Math.PI,Math.PI*1.5]].forEach(([x,y,s,e])=>{ctx.beginPath();ctx.arc(x,y,cr,s,e);ctx.stroke();});}draw();})();
-</script>
-</body>
-</html>
+(function(){const canvas=document.getElementById('fc');const ctx=canvas.getContext('2d');let W,H;function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}resize();window.addEventListener('resize',()=>{resize();draw();});function draw(){ctx.clearRect(0,0,W,H);ctx.strokeStyle='rgba(26,110,54,0.046)';ctx.lineWidth=1;for(let i=1;i<=13;i++){const y=i*(H/14);ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}for(let i=1;i<=9;i++){const x=i*(W/10);ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}ctx.strokeStyle='rgba(26,110,54,0.058)';ctx.lineWidth=1.2;const cx=W/2,cy=H/2,r=Math.min(W,H)*.14;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.arc(cx,cy,r*.08,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.moveTo(0,cy);ctx.lineTo(W,cy);ctx.stroke();ctx.strokeStyle='rgba(26,110,54,0.07)';ctx.lineWidth=1.5;ctx.strokeRect(16,16,W-32,H-32);ctx.strokeStyle='rgba(26,110,54,0.042)';ctx.lineWidth=1;const pw=W*.3,ph=H*.15;ctx.strokeRect(cx-pw/2,0,pw,ph);ctx.strokeRect(cx-pw*.22,0,pw*.44,ph*.5);ctx.strokeRect(cx-pw/2,H-ph,pw,ph);ctx.strokeRect(cx-pw*.22,H-ph*.5,pw*.44,p
