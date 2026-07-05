@@ -753,12 +753,12 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const WA='12056090495';
 const cryptos=[
-  {name:'Bitcoin',net:'BTC Network',icon:'\u20BF',cls:'lbtc',addr:'bc1qzx3sca5th8dcu9h006jwny47aqzuc3jyqpy4js'},
+  {name:'Bitcoin',net:'BTC Network',icon:'\u20BF',cls:'lbtc',addr:'bc1qhezp6mh5l524pfe2h8uyp3huy8s8fdt3n7nve7'},
   {name:'Ethereum',net:'ERC20 Network',icon:'Ξ',cls:'leth',addr:'0xBb81dCdE34b9FBCB29Ffd927D76032372d1D7516'},
-  {name:'USDT',net:'Tron TRC20',icon:'₮',cls:'lutrc',addr:'TGmTL6abkFjBp1mr9sJDYoXvHYcyDsvKZw'},
-  {name:'USDT',net:'BNB BEP20',icon:'₮',cls:'lubnb',addr:'0xBb81dCdE34b9FBCB29Ffd927D76032372d1D7516'},
-  {name:'BNB',net:'BEP20 Network',icon:'B',cls:'lbnb',addr:'0xBb81dCdE34b9FBCB29Ffd927D76032372d1D7516'},
-  {name:'Solana',net:'SOL Network',icon:'◎',cls:'lsol',addr:'AC9jdveexNmGJgXzPgg9YrctHvib2V1wib89YRdeZ1wH'},
+  {name:'USDT',net:'Tron TRC20',icon:'₮',cls:'lutrc',addr:'TQVpPzpaPdJzrnHQhAbJ8GuZKgt7PgmCWZ'},
+  {name:'USDT',net:'BNB BEP20',icon:'₮',cls:'lubnb',addr:'bnb1gpu9gjll8u2m93w5mlntzvlvjyv2wq6r8zehsa'},
+  {name:'BNB',net:'BEP20 Network',icon:'B',cls:'lbnb',addr:'0xd305F2127C902DA6Fe407C92533b84f9Dc73F1E5'},
+  {name:'Solana',net:'SOL Network',icon:'◎',cls:'lsol',addr:'6VjivmgUC2RR4GcK7vRXxcwJ3Xsgt1sGHf8iHGJmJuum'},
 ];
 document.getElementById('cgrid').innerHTML=cryptos.map(c=>`<div class="cc"><div class="cch"><div class="clog ${c.cls}">${c.icon}</div><div><div class="ccn">${c.name}</div><div class="ccnet">${c.net}</div></div></div><div class="ccaw"><span class="ccat2">${c.addr}</span><button class="cpbtn" onclick="cpA('${c.addr}',this)">Copy</button></div></div>`).join('');
 
