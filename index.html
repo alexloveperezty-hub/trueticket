@@ -24,7 +24,8 @@ body{background:var(--w);color:var(--ink);font-family:"Inter",sans-serif;overflo
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:62px;background:rgba(255,255,255,.96);backdrop-filter:blur(24px);border-bottom:1px solid var(--bd);}
-.logo{font-family:"Bebas Neue",sans-serif;font-size:22px;letter-spacing:2.5px;text-decoration:none;display:flex;align-items:baseline;gap:0;}
+.logo{font-family:"Bebas Neue",sans-serif;font-size:22px;letter-spacing:2.5px;text-decoration:none;display:flex;align-items:center;gap:8px;}
+.logo-crest{width:26px;height:26px;flex-shrink:0;}
 .lt{color:var(--ink)}.lk{color:var(--g)}.ld{color:var(--gold3);font-size:24px;line-height:1}.ls{color:var(--mute2);font-size:14px;letter-spacing:1px}
 .nl{display:flex;gap:24px;align-items:center;}
 .nl a{color:var(--mute);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.2px;transition:color .18s;}
@@ -172,6 +173,8 @@ section{position:relative;z-index:1;}
 .cmatch{font-family:"Bebas Neue",sans-serif;font-size:24px;letter-spacing:.5px;color:#fff;padding-right:70px;line-height:1.15;margin-bottom:10px;}
 .cmeta{display:flex;flex-direction:column;gap:6px;}
 .cmi{font-size:11px;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:6px;}
+.mic{width:12px;height:12px;flex-shrink:0;vertical-align:-1px;}
+.modal-stadium .mic{width:12px;height:12px;vertical-align:-2px;color:var(--mute2);}
 .cbody{padding:18px 22px 20px;}
 .csc{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding:8px 11px;background:var(--off);border-radius:4px;border:1px solid var(--bd);}
 .cql{font-size:11.5px;font-weight:600;}
@@ -208,7 +211,8 @@ section{position:relative;z-index:1;}
 .trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:10px;overflow:hidden;max-width:1060px;margin:0 auto;}
 .tcard{background:#fff;padding:28px 24px;transition:background .2s;}
 .tcard:hover{background:var(--off);}
-.tci{width:38px;height:38px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:14px;}
+.tci{width:42px;height:42px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center;margin-bottom:14px;color:var(--g);}
+.tci svg{width:19px;height:19px;}
 .tcard h3{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:5px;}
 .tcard p{font-size:12.5px;color:var(--mute);line-height:1.65;}
 
@@ -271,6 +275,8 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
 .fcol h4{font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:14px;}
 .fcol a{display:block;font-size:12.5px;color:rgba(255,255,255,.5);text-decoration:none;margin-bottom:9px;transition:color .18s;}
 .fcol a:hover{color:var(--g3);}
+.femail{display:flex!important;align-items:center;gap:7px;}
+.ficn{width:14px;height:14px;flex-shrink:0;opacity:.7;}
 .fb2{border-top:1px solid rgba(255,255,255,.06);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;position:relative;z-index:1;}
 .fb2 p{font-size:11.5px;color:rgba(255,255,255,.25);}
 .disc{font-size:10.5px;color:rgba(255,255,255,.16);max-width:460px;line-height:1.5;}
@@ -364,7 +370,13 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="logo"><span class="lt">True</span><span class="lk">Ticket</span><span class="ld">.</span><span class="ls">shop</span></a>
+  <a href="#" class="logo">
+    <svg class="logo-crest" viewBox="0 0 40 40" fill="none">
+      <circle cx="20" cy="20" r="18" stroke="url(#lcg)" stroke-width="1.4"/>
+      <path d="M20 9l2.4 6.6L29 17l-5.4 4 1.9 7-5.5-4.1L14.5 28l1.9-7L11 17l6.6-1.4L20 9z" fill="url(#lcg)"/>
+      <defs><linearGradient id="lcg" x1="4" y1="4" x2="36" y2="36"><stop offset="0" stop-color="var(--gold3)"/><stop offset="1" stop-color="var(--g3)"/></linearGradient></defs>
+    </svg>
+    <span class="lt">True</span><span class="lk">Ticket</span><span class="ld">.</span><span class="ls">shop</span></a>
   <div class="nl">
     <a href="#tickets">Tickets</a>
     <a href="how-it-works.html">How It Works</a>
@@ -574,10 +586,10 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
 <div class="trust-sec">
   <div class="sh c reveal"><span class="sk">Why Choose Us</span><h2 class="stitle">Trusted by <span class="go">Thousands</span></h2></div>
   <div class="trust-grid">
-    <div class="tcard reveal"><div class="tci">🎟️</div><h3>100% Verified</h3><p>Every ticket manually verified before delivery. Authenticity guaranteed.</p></div>
-    <div class="tcard reveal"><div class="tci">⚡</div><h3>Minutes to Deliver</h3><p>Digital delivery via WhatsApp within minutes of payment confirmation.</p></div>
-    <div class="tcard reveal"><div class="tci">💬</div><h3>Human Support</h3><p>Real person on WhatsApp. No bots, no queues — direct and fast.</p></div>
-    <div class="tcard reveal"><div class="tci">🔐</div><h3>6 Crypto Options</h3><p>BTC, ETH, USDT, BNB, SOL accepted. Fully transparent transactions.</p></div>
+    <div class="tcard reveal"><div class="tci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a2 2 0 010-4V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 010 4v2a2 2 0 010 4v2a2 2 0 002 2h12a2 2 0 002-2v-2a2 2 0 010-4z"/><path d="M13 6l-2 2M13 11l-2 2M13 16l-2 2"/></svg></div><h3>100% Verified</h3><p>Every ticket manually verified before delivery. Authenticity guaranteed.</p></div>
+    <div class="tcard reveal"><div class="tci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.5 13.5H11L10 22l9-13H12l1-7z"/></svg></div><h3>Minutes to Deliver</h3><p>Digital delivery via WhatsApp within minutes of payment confirmation.</p></div>
+    <div class="tcard reveal"><div class="tci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div><h3>Human Support</h3><p>Real person on WhatsApp. No bots, no queues — direct and fast.</p></div>
+    <div class="tcard reveal"><div class="tci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="1.5"/><path d="M8 10V7a4 4 0 018 0v3"/><circle cx="12" cy="15" r="1.4" fill="currentColor" stroke="none"/></svg></div><h3>6 Crypto Options</h3><p>BTC, ETH, USDT, BNB, SOL accepted. Fully transparent transactions.</p></div>
   </div>
 </div>
 
@@ -700,7 +712,7 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
       <p class="fdesc">Verified resale tickets for the 2026 FIFA World Cup. Fast delivery, real support, every time.</p>
     </div>
     <div class="fcol"><h4>Navigation</h4><a href="#tickets">Browse Tickets</a><a href="how-it-works.html">How It Works</a><a href="#faq">FAQ</a><a href="terms.html">Terms of Use</a></div>
-    <div class="fcol"><h4>Contact</h4><a href="#" onclick="openWA('Hi, I want to buy a World Cup ticket')">WhatsApp: +1 (205) 609 0495</a><a href="/cdn-cgi/l/email-protection#3c55525a537c484e495948555f575948124f54534c"><span class="__cf_email__" data-cfemail="066f6860694672747363726f656d637228756e6976">[email&#160;protected]</span></a></div>
+    <div class="fcol"><h4>Contact</h4><a href="#" onclick="openWA('Hi, I want to buy a World Cup ticket')">WhatsApp: +1 (205) 609 0495</a><a href="mailto:info@trueticketshop.online" class="femail"><svg class="ficn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6.5h18v11a1.5 1.5 0 01-1.5 1.5h-15A1.5 1.5 0 013 17.5v-11z"/><path d="M3.5 6.8l8.5 6.4 8.5-6.4"/></svg> info@trueticketshop.online</a></div>
   </div>
   <div class="fb2">
     <p>© 2026 TrueTicket.shop — All rights reserved</p>
@@ -765,7 +777,7 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 const WA='12056090495';
 const cryptos=[
   {name:'Bitcoin',net:'BTC Network',icon:'\u20BF',cls:'lbtc',addr:'bc1qzx3sca5th8dcu9h006jwny47aqzuc3jyqpy4js'},
@@ -807,6 +819,11 @@ function initReveal(){
   });
 }
 
+const ICONS = {
+  cal: '<svg class="mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="16" rx="2"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg>',
+  stadium: '<svg class="mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="9" ry="6"/><ellipse cx="12" cy="12" rx="4.2" ry="2.6"/></svg>',
+  pin: '<svg class="mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.4 7-11.5A7 7 0 105 9.5C5 14.6 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>',
+};
 const stageLabels = {quarterfinal:'Quarterfinal',semifinal:'Semi-Final / 3rd Place',final:'The Final'};
 function renderT(f){
   const list=f==='all'?tickets:f==='vip'?tickets.filter(t=>t.cat==='vip'):tickets.filter(t=>t.stage===f);
@@ -830,7 +847,7 @@ function renderT(f){
         <span class="cstage">${stageLabels[t.stage]||''}</span>
         <span class="ccat ${bc}">${t.category}</span>
         <div class="cmatch">${t.match}</div>
-        <div class="cmeta"><span class="cmi">📅 ${ds} · ${ts} ET</span><span class="cmi">🏟 ${t.stadium}</span><span class="cmi">📍 ${t.city}</span></div>
+        <div class="cmeta"><span class="cmi">${ICONS.cal} ${ds} · ${ts} ET</span><span class="cmi">${ICONS.stadium} ${t.stadium}</span><span class="cmi">${ICONS.pin} ${t.city}</span></div>
       </div>
       <div class="cbody">
         <div class="csc">
@@ -1003,7 +1020,7 @@ function oModal(id){
 
   document.getElementById('mname').textContent = t.match;
   document.getElementById('m-eyebrow').textContent = 'SELECT YOUR POSITION';
-  document.getElementById('m-stadium').textContent = `📅 ${ds}  ·  🏟 ${t.stadium}  ·  📍 ${t.city}`;
+  document.getElementById('m-stadium').innerHTML = `${ICONS.cal} ${ds}&nbsp;&nbsp;·&nbsp;&nbsp;${ICONS.stadium} ${t.stadium}&nbsp;&nbsp;·&nbsp;&nbsp;${ICONS.pin} ${t.city}`;
 
   const grid = document.getElementById('seat-grid');
   grid.innerHTML = plan.seats.map((s,i) => {
