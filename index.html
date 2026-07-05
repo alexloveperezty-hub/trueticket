@@ -150,37 +150,52 @@ section{position:relative;z-index:1;}
 .fb:hover,.fb.active{background:var(--ink);border-color:var(--ink);color:#fff;}
 
 /* TICKET GRID */
-.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:22px;max-width:1160px;margin:0 auto;}
+.tgrid{display:flex;flex-direction:column;gap:20px;max-width:920px;margin:0 auto;}
 .tc{background:#fff;border:1px solid var(--bd);border-radius:10px;overflow:hidden;transition:transform .22s,box-shadow .22s;box-shadow:var(--sh);}
 .tc:hover{transform:translateY(-3px);box-shadow:var(--shl),0 0 0 1px var(--bd2);}
 .tc.lq{border-color:rgba(184,50,40,.18);animation:qlg 3s ease-in-out infinite;}
 @keyframes qlg{0%,100%{box-shadow:0 0 0 1px rgba(184,50,40,.08),var(--sh)}50%{box-shadow:0 0 0 2px rgba(184,50,40,.18),0 4px 20px rgba(184,50,40,.08)}}
-.ct{background:linear-gradient(145deg,#0c1e0f 0%,#172b1a 100%);padding:18px 20px 14px;position:relative;}
+@media(min-width:820px){
+  .tc{display:flex;align-items:stretch;}
+  .ct{width:300px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;}
+  .cbody{flex:1;display:flex;flex-direction:column;justify-content:center;}
+}
+.ct{background:linear-gradient(145deg,#0c1e0f 0%,#172b1a 100%);padding:20px 22px 16px;position:relative;}
 .ctl{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--g3),transparent);}
 .tc.lq .ctl{background:linear-gradient(90deg,#ff4a42,transparent);}
+.cstage{font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold3);margin-bottom:8px;display:block;}
 .ccat{position:absolute;top:14px;right:14px;padding:3px 8px;border-radius:2px;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;}
 .bvip{background:linear-gradient(135deg,var(--gold4),var(--gold3));color:#1a0c00;}
 .bc1{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.15);}
 .bc2{background:rgba(34,160,80,.15);color:#7affa0;border:1px solid rgba(34,160,80,.25);}
 .bc3{background:rgba(255,255,255,.05);color:rgba(255,255,255,.4);}
-.cmatch{font-family:"Bebas Neue",sans-serif;font-size:20px;letter-spacing:.5px;color:#fff;padding-right:70px;line-height:1.15;margin-bottom:8px;}
-.cmeta{display:flex;gap:10px;flex-wrap:wrap;}
-.cmi{font-size:10.5px;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:4px;}
-.cbody{padding:14px 20px 16px;}
-.csc{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding:8px 11px;background:var(--off);border-radius:4px;border:1px solid var(--bd);}
+.cmatch{font-family:"Bebas Neue",sans-serif;font-size:24px;letter-spacing:.5px;color:#fff;padding-right:70px;line-height:1.15;margin-bottom:10px;}
+.cmeta{display:flex;flex-direction:column;gap:6px;}
+.cmi{font-size:11px;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:6px;}
+.cbody{padding:18px 22px 20px;}
+.csc{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding:8px 11px;background:var(--off);border-radius:4px;border:1px solid var(--bd);}
 .cql{font-size:11.5px;font-weight:600;}
 .qc{color:var(--red)}.qw{color:var(--amb)}.qo{color:var(--g)}
 .ccd{font-size:14px;font-weight:600;letter-spacing:.5px;}
 .cdc{color:var(--red);animation:blk 1s ease-in-out infinite;}.cdw{color:var(--amb);}.cdo{color:var(--mute2);}
 @keyframes blk{0%,100%{opacity:1}50%{opacity:.4}}
 .ccdl{font-size:9.5px;color:var(--mute2);display:block;text-align:right;}
-.cprow{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px;}
+.cprow{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;}
 .cprice{font-family:"Bebas Neue",sans-serif;font-size:38px;letter-spacing:1px;color:var(--ink);}
 .cprice .cu{font-size:18px;color:var(--mute2);}
+.cprice-strike{font-size:16px;color:var(--mute2);text-decoration:line-through;margin-right:8px;}
 .cpr{text-align:right;}
 .cppt{font-size:10.5px;color:var(--mute2);}
 .cps{font-size:9.5px;color:rgba(154,114,9,.7);font-weight:500;margin-top:2px;}
 .cpcp{font-size:10.5px;color:var(--g);font-weight:600;}
+.card-promo{display:flex;gap:6px;margin-bottom:10px;}
+.card-promo input{flex:1;min-width:0;padding:9px 10px;border-radius:6px;border:1px solid var(--bd2);font-family:"Inter",sans-serif;font-size:12px;background:var(--off);color:var(--ink);text-transform:uppercase;letter-spacing:.4px;}
+.card-promo input:focus{outline:none;border-color:var(--g);background:#fff;}
+.card-promo button{background:var(--ink);color:#fff;border:none;border-radius:6px;padding:0 14px;font-size:11.5px;font-weight:600;cursor:pointer;transition:background .18s;white-space:nowrap;}
+.card-promo button:hover{background:var(--g);}
+.card-promo-msg{font-size:11px;font-weight:500;margin-bottom:10px;min-height:14px;}
+.card-promo-msg.ok{color:var(--g);}
+.card-promo-msg.err{color:var(--red);}
 .cbtns{display:flex;gap:8px;}
 .cbuy{flex:1;background:var(--g);color:#fff;font-weight:600;font-size:13px;padding:10px 0;border-radius:4px;border:none;cursor:pointer;font-family:"Inter",sans-serif;transition:all .18s;}
 .cbuy:hover{background:var(--ink);transform:translateY(-1px);}
@@ -508,7 +523,7 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
       <div class="hr-card-body">
         <div class="hrcb-price"><span>$</span>12,800</div>
         <div class="hrcb-sub">per ticket · official face value $7,875 · crypto accepted</div>
-        <div class="hrc-sc"><span class="prd"></span>Only 9 ticket remaining</div>
+        <div class="hrc-sc"><span class="prd"></span>Only 1 ticket remaining</div>
         <button class="hrc-btn" onclick="openWA('Hi, I want to buy the World Cup Final VIP ticket at $12,800')">Secure This Ticket →</button>
       </div>
     </div>
@@ -685,7 +700,7 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
       <p class="fdesc">Verified resale tickets for the 2026 FIFA World Cup. Fast delivery, real support, every time.</p>
     </div>
     <div class="fcol"><h4>Navigation</h4><a href="#tickets">Browse Tickets</a><a href="how-it-works.html">How It Works</a><a href="#faq">FAQ</a><a href="terms.html">Terms of Use</a></div>
-    <div class="fcol"><h4>Contact</h4><a href="#" onclick="openWA('Hi, I want to buy a World Cup ticket')">WhatsApp: +1 (205) 609 0495</a><a href="/cdn-cgi/l/email-protection#3c55525a537c484e495948555f575948124f54534c"><span class="__cf_email__" data-cfemail="066f6860694672747363726f656d637228756e6976">Email: Info@trueticketshop.online&#160;</span></a></div>
+    <div class="fcol"><h4>Contact</h4><a href="#" onclick="openWA('Hi, I want to buy a World Cup ticket')">WhatsApp: +1 (205) 609 0495</a><a href="/cdn-cgi/l/email-protection#3c55525a537c484e495948555f575948124f54534c"><span class="__cf_email__" data-cfemail="066f6860694672747363726f656d637228756e6976">[email&#160;protected]</span></a></div>
   </div>
   <div class="fb2">
     <p>© 2026 TrueTicket.shop — All rights reserved</p>
@@ -753,12 +768,12 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const WA='12056090495';
 const cryptos=[
-  {name:'Bitcoin',net:'BTC Network',icon:'\u20BF',cls:'lbtc',addr:'bc1qhezp6mh5l524pfe2h8uyp3huy8s8fdt3n7nve7'},
+  {name:'Bitcoin',net:'BTC Network',icon:'\u20BF',cls:'lbtc',addr:'bc1qzx3sca5th8dcu9h006jwny47aqzuc3jyqpy4js'},
   {name:'Ethereum',net:'ERC20 Network',icon:'Ξ',cls:'leth',addr:'0xBb81dCdE34b9FBCB29Ffd927D76032372d1D7516'},
-  {name:'USDT',net:'Tron TRC20',icon:'₮',cls:'lutrc',addr:'TQVpPzpaPdJzrnHQhAbJ8GuZKgt7PgmCWZ'},
-  {name:'USDT',net:'BNB BEP20',icon:'₮',cls:'lubnb',addr:'bnb1gpu9gjll8u2m93w5mlntzvlvjyv2wq6r8zehsa'},
-  {name:'BNB',net:'BEP20 Network',icon:'B',cls:'lbnb',addr:'0xd305F2127C902DA6Fe407C92533b84f9Dc73F1E5'},
-  {name:'Solana',net:'SOL Network',icon:'◎',cls:'lsol',addr:'6VjivmgUC2RR4GcK7vRXxcwJ3Xsgt1sGHf8iHGJmJuum'},
+  {name:'USDT',net:'Tron TRC20',icon:'₮',cls:'lutrc',addr:'TGmTL6abkFjBp1mr9sJDYoXvHYcyDsvKZw'},
+  {name:'USDT',net:'BNB BEP20',icon:'₮',cls:'lubnb',addr:'0xBb81dCdE34b9FBCB29Ffd927D76032372d1D7516'},
+  {name:'BNB',net:'BEP20 Network',icon:'B',cls:'lbnb',addr:'0xBb81dCdE34b9FBCB29Ffd927D76032372d1D7516'},
+  {name:'Solana',net:'SOL Network',icon:'◎',cls:'lsol',addr:'AC9jdveexNmGJgXzPgg9YrctHvib2V1wib89YRdeZ1wH'},
 ];
 document.getElementById('cgrid').innerHTML=cryptos.map(c=>`<div class="cc"><div class="cch"><div class="clog ${c.cls}">${c.icon}</div><div><div class="ccn">${c.name}</div><div class="ccnet">${c.net}</div></div></div><div class="ccaw"><span class="ccat2">${c.addr}</span><button class="cpbtn" onclick="cpA('${c.addr}',this)">Copy</button></div></div>`).join('');
 
@@ -792,6 +807,7 @@ function initReveal(){
   });
 }
 
+const stageLabels = {quarterfinal:'Quarterfinal',semifinal:'Semi-Final / 3rd Place',final:'The Final'};
 function renderT(f){
   const list=f==='all'?tickets:f==='vip'?tickets.filter(t=>t.cat==='vip'):tickets.filter(t=>t.stage===f);
   document.getElementById('tgrid').innerHTML=list.map(t=>{
@@ -799,13 +815,22 @@ function renderT(f){
     const bc=t.cat==='vip'?'bvip':t.cat==='cat1'?'bc1':t.cat==='cat2'?'bc2':'bc3';
     const qc=t.qty===1?'qc':t.qty<=3?'qw':'qo';
     const d=new Date(t.date);
-    const ds=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+    const ds=d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
     const ts=d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+    const st = promoState[t.id];
+    const pct = (st && st.status==='ok') ? st.pct : 0;
+    const finalPrice = Math.round(t.price * (1 - pct/100));
+    const priceHtml = pct>0
+      ? `<span class="cprice-strike">$${t.price.toLocaleString()}</span><span class="cprice"><span class="cu">$</span>${finalPrice.toLocaleString()}</span>`
+      : `<div class="cprice"><span class="cu">$</span>${t.price.toLocaleString()}</div>`;
+    const msgText = st ? (st.status==='ok' ? `✓ ${st.label} — ${st.pct}% off` : `That code isn't valid.`) : '';
+    const msgCls = st ? (st.status==='ok' ? 'ok' : 'err') : '';
     return `<div class="tc reveal${lq?' lq':''}" data-id="${t.id}">
       <div class="ct"><div class="ctl"></div>
+        <span class="cstage">${stageLabels[t.stage]||''}</span>
         <span class="ccat ${bc}">${t.category}</span>
         <div class="cmatch">${t.match}</div>
-        <div class="cmeta"><span class="cmi">📅 ${ds} · ${ts}</span><span class="cmi">🏟 ${t.stadium}</span><span class="cmi">📍 ${t.city}</span></div>
+        <div class="cmeta"><span class="cmi">📅 ${ds} · ${ts} ET</span><span class="cmi">🏟 ${t.stadium}</span><span class="cmi">📍 ${t.city}</span></div>
       </div>
       <div class="cbody">
         <div class="csc">
@@ -814,11 +839,16 @@ function renderT(f){
         </div>
         <div class="cprow">
           <div>
-            <div class="cprice"><span class="cu">$</span>${t.price.toLocaleString()}</div>
+            ${priceHtml}
             <div class="cps">Official face value: $${t.officialBase.toLocaleString()}</div>
           </div>
           <div class="cpr"><div class="cppt">per ticket</div><div class="cpcp">Crypto accepted</div></div>
         </div>
+        <div class="card-promo">
+          <input type="text" id="promo-input-${t.id}" placeholder="Have a promo code?" maxlength="20" value="${st?st.code:''}" onkeydown="if(event.key==='Enter'){applyCardPromo(${t.id});event.preventDefault();}">
+          <button type="button" onclick="applyCardPromo(${t.id})">Apply</button>
+        </div>
+        <div class="card-promo-msg ${msgCls}">${msgText}</div>
         <div class="cbtns">
           <button class="cbuy" onclick="oModal(${t.id})">Buy Now</button>
           <button class="cres" onclick="openWA('Hi, I want to reserve a World Cup ticket for ${t.match} — ${t.category}')">${WSV} Reserve</button>
@@ -828,8 +858,23 @@ function renderT(f){
   }).join('');
   initReveal();
 }
+let currentFilter = 'all';
+const promoState = {};
+function applyCardPromo(id){
+  const input = document.getElementById('promo-input-'+id);
+  const code = input.value.trim().toUpperCase();
+  if(!code){ delete promoState[id]; renderT(currentFilter); uCDs(); return; }
+  const found = promoCodes[code];
+  if(!found){
+    promoState[id] = { code, pct:0, label:'', status:'err' };
+  } else {
+    promoState[id] = { code, pct: found.pct, label: found.label, status:'ok' };
+  }
+  renderT(currentFilter);
+  uCDs();
+}
 renderT('all');
-function filterT(f,b){document.querySelectorAll('.fb').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderT(f);uCDs();}
+function filterT(f,b){document.querySelectorAll('.fb').forEach(x=>x.classList.remove('active'));b.classList.add('active');currentFilter=f;renderT(f);uCDs();}
 function pad(n){return String(n).padStart(2,'0');}
 function fmtCd(ms){if(ms<=0)return'00:00:00';const h=Math.floor(ms/3600000),m=Math.floor((ms%3600000)/60000),s=Math.floor((ms%60000)/1000);if(h>99){const d=Math.floor(h/24);return d+'d '+pad(h%24)+'h';}return pad(h)+':'+pad(m)+':'+pad(s);}
 function cdCls(ms){return ms<3600000?'cdc':ms<7200000?'cdw':'cdo';}
@@ -1001,13 +1046,20 @@ function selectSeat(idx){
   const seat = plan.seats[idx];
   if(!seat || seat.avail==='sold') return;
   currentSeat = seat;
-  currentDiscountPct = 0;
+
+  const carried = promoState[currentTicket.id];
+  currentDiscountPct = (carried && carried.status==='ok') ? carried.pct : 0;
 
   document.getElementById('m2-match').textContent = currentTicket.match;
   document.getElementById('m2-seat-chosen').textContent = `📌 ${seat.name}`;
-  document.getElementById('promo-input').value = '';
-  document.getElementById('promo-msg').textContent = '';
-  document.getElementById('promo-msg').className = 'promo-msg';
+  document.getElementById('promo-input').value = carried ? carried.code : '';
+  if(carried && carried.status==='ok'){
+    document.getElementById('promo-msg').textContent = `✓ ${carried.label} applied — ${carried.pct}% off`;
+    document.getElementById('promo-msg').className = 'promo-msg ok';
+  } else {
+    document.getElementById('promo-msg').textContent = '';
+    document.getElementById('promo-msg').className = 'promo-msg';
+  }
   updatePriceDisplay();
 
   document.getElementById('modal-step1').style.display='none';
