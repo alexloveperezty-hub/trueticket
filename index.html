@@ -35,6 +35,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 /* HERO */
 #hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:100px 6% 80px;position:relative;overflow:hidden;}
 
+/* Ambient glow orbs — adds depth/motion to an otherwise flat hero */
+.glow-orb{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:0;opacity:.35;animation:orbfloat 14s ease-in-out infinite;}
+.orb1{width:420px;height:420px;background:radial-gradient(circle,var(--g3),transparent 70%);top:-8%;right:8%;animation-delay:0s;}
+.orb2{width:320px;height:320px;background:radial-gradient(circle,var(--gold3),transparent 70%);bottom:-5%;left:2%;animation-delay:-5s;}
+.orb3{width:260px;height:260px;background:radial-gradient(circle,var(--g),transparent 70%);top:35%;left:38%;animation-delay:-9s;opacity:.2;}
+@keyframes orbfloat{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(20px,-24px) scale(1.08);}66%{transform:translate(-18px,16px) scale(0.94);}}
+
+/* Scroll-reveal: elements fade/slide up into view */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.16,.8,.3,1),transform .7s cubic-bezier(.16,.8,.3,1);}
+.reveal.in-view{opacity:1;transform:translateY(0);}
+.reveal-stagger.in-view{transition-delay:calc(var(--ri, 0) * 70ms);}
+
 /* FOOTBALLER SILHOUETTE — CSS drawn, blurred */
 .footballer{
   position:absolute;
@@ -317,6 +329,15 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
 .m2-crypto strong,.m2-wa strong{display:block;font-size:14px;color:var(--ink);font-weight:600;}
 .m2-crypto small,.m2-wa small{display:block;font-size:11px;color:var(--mute);margin-top:1px;font-weight:400;}
 .m2-verify-note{font-size:11.5px;color:var(--mute);background:var(--gl);border:1px solid var(--bd2);border-radius:8px;padding:10px 12px;margin-top:14px;line-height:1.5;}
+.promo-box{display:flex;gap:8px;margin-bottom:6px;}
+.promo-box input{flex:1;padding:11px 13px;border-radius:7px;border:1px solid var(--bd2);font-family:"Inter",sans-serif;font-size:13px;background:var(--off);color:var(--ink);text-transform:uppercase;letter-spacing:.5px;}
+.promo-box input:focus{outline:none;border-color:var(--g);background:#fff;}
+.promo-box button{background:var(--ink);color:#fff;border:none;border-radius:7px;padding:0 18px;font-size:12.5px;font-weight:600;cursor:pointer;transition:background .18s;}
+.promo-box button:hover{background:var(--g);}
+.promo-msg{font-size:12px;font-weight:500;margin-bottom:14px;min-height:16px;}
+.promo-msg.ok{color:var(--g);}
+.promo-msg.err{color:var(--red);}
+.m2-price-strike{font-size:16px;color:var(--mute2);text-decoration:line-through;margin-right:6px;}
 
 @media(max-width:900px){#hero{grid-template-columns:1fr;padding-top:90px;}.hero-right{display:none;}.nl{display:none;}.footballer{display:none;}}
 @media(max-width:600px){.hero-title{font-size:48px;}.tgrid{grid-template-columns:1fr;}.cgrid{grid-template-columns:1fr;}.cbtns{flex-direction:column;}.ss-in{flex-direction:column;}.ss-stats{flex-wrap:wrap;justify-content:center;}.sst{padding:12px 20px;border-top:1px solid rgba(255,255,255,.06);border-left:none;}.sst:first-child{border-top:none;}.ft{flex-direction:column;}}
@@ -340,6 +361,9 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
 
 <!-- HERO -->
 <section id="hero">
+  <div class="glow-orb orb1"></div>
+  <div class="glow-orb orb2"></div>
+  <div class="glow-orb orb3"></div>
 
   <!-- BLURRED FOOTBALLER SILHOUETTE -->
   <div class="footballer">
@@ -533,12 +557,12 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
 
 <!-- TRUST -->
 <div class="trust-sec">
-  <div class="sh c"><span class="sk">Why Choose Us</span><h2 class="stitle">Trusted by <span class="go">Thousands</span></h2></div>
+  <div class="sh c reveal"><span class="sk">Why Choose Us</span><h2 class="stitle">Trusted by <span class="go">Thousands</span></h2></div>
   <div class="trust-grid">
-    <div class="tcard"><div class="tci">🎟️</div><h3>100% Verified</h3><p>Every ticket manually verified before delivery. Authenticity guaranteed.</p></div>
-    <div class="tcard"><div class="tci">⚡</div><h3>Minutes to Deliver</h3><p>Digital delivery via WhatsApp within minutes of payment confirmation.</p></div>
-    <div class="tcard"><div class="tci">💬</div><h3>Human Support</h3><p>Real person on WhatsApp. No bots, no queues — direct and fast.</p></div>
-    <div class="tcard"><div class="tci">🔐</div><h3>6 Crypto Options</h3><p>BTC, ETH, USDT, BNB, SOL accepted. Fully transparent transactions.</p></div>
+    <div class="tcard reveal"><div class="tci">🎟️</div><h3>100% Verified</h3><p>Every ticket manually verified before delivery. Authenticity guaranteed.</p></div>
+    <div class="tcard reveal"><div class="tci">⚡</div><h3>Minutes to Deliver</h3><p>Digital delivery via WhatsApp within minutes of payment confirmation.</p></div>
+    <div class="tcard reveal"><div class="tci">💬</div><h3>Human Support</h3><p>Real person on WhatsApp. No bots, no queues — direct and fast.</p></div>
+    <div class="tcard reveal"><div class="tci">🔐</div><h3>6 Crypto Options</h3><p>BTC, ETH, USDT, BNB, SOL accepted. Fully transparent transactions.</p></div>
   </div>
 </div>
 
@@ -546,11 +570,11 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
 
 <!-- TESTIMONIALS -->
 <div class="testi-sec">
-  <div class="sh c"><span class="sk">Reviews</span><h2 class="stitle">What <span class="go">Buyers</span> Say</h2></div>
+  <div class="sh c reveal"><span class="sk">Reviews</span><h2 class="stitle">What <span class="go">Buyers</span> Say</h2></div>
   <div class="tgrid2">
-    <div class="testi"><div class="tstars">★★★★★</div><p class="ttext">"Got my quarterfinal tickets for Miami within 20 minutes of payment. Absolutely seamless."</p><div class="tau"><div class="tav">RK</div><div><div class="tan">Rafael K.</div><div class="tal">São Paulo, Brazil</div></div></div></div>
-    <div class="testi"><div class="tstars">★★★★★</div><p class="ttext">"Skeptical at first, but the WhatsApp support was incredible. Tickets scanned perfectly at the gate."</p><div class="tau"><div class="tav">MA</div><div><div class="tan">Marco A.</div><div class="tal">Milan, Italy</div></div></div></div>
-    <div class="testi"><div class="tstars">★★★★★</div><p class="ttext">"VIP seats for the semi-final in Dallas. Unreal view. TrueTicket delivered exactly as promised."</p><div class="tau"><div class="tav">JL</div><div><div class="tan">James L.</div><div class="tal">New York, USA</div></div></div></div>
+    <div class="testi reveal"><div class="tstars">★★★★★</div><p class="ttext">"Got my quarterfinal tickets for Miami within 20 minutes of payment. Absolutely seamless."</p><div class="tau"><div class="tav">RK</div><div><div class="tan">Rafael K.</div><div class="tal">São Paulo, Brazil</div></div></div></div>
+    <div class="testi reveal"><div class="tstars">★★★★★</div><p class="ttext">"Skeptical at first, but the WhatsApp support was incredible. Tickets scanned perfectly at the gate."</p><div class="tau"><div class="tav">MA</div><div><div class="tan">Marco A.</div><div class="tal">Milan, Italy</div></div></div></div>
+    <div class="testi reveal"><div class="tstars">★★★★★</div><p class="ttext">"VIP seats for the semi-final in Dallas. Unreal view. TrueTicket delivered exactly as promised."</p><div class="tau"><div class="tav">JL</div><div><div class="tan">James L.</div><div class="tal">New York, USA</div></div></div></div>
   </div>
 </div>
 
@@ -558,7 +582,7 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
 
 <!-- CRYPTO PAYMENT -->
 <section id="payment" class="crypto-sec">
-  <div class="sh c"><span class="sk">Payment Options</span><h2 class="stitle">Pay With <span class="go">Crypto</span></h2><p class="ssub">Send to any address below — then confirm your order via WhatsApp</p></div>
+  <div class="sh c reveal"><span class="sk">Payment Options</span><h2 class="stitle">Pay With <span class="go">Crypto</span></h2><p class="ssub">Send to any address below — then confirm your order via WhatsApp</p></div>
   <div class="cgrid" id="cgrid"></div>
   <div class="pnote">
     <span class="pnote-i">⚠️</span>
@@ -574,7 +598,7 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
 
 <!-- FAQ -->
 <section id="faq" class="faq-sec">
-  <div class="sh c"><span class="sk">FAQ</span><h2 class="stitle">Common <span class="go">Questions</span></h2></div>
+  <div class="sh c reveal"><span class="sk">FAQ</span><h2 class="stitle">Common <span class="go">Questions</span></h2></div>
   <div class="flist" id="flist"></div>
 </section>
 
@@ -703,6 +727,11 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
         <span class="m2-price" id="m2-price"></span>
         <span class="m2-ppt">per ticket</span>
       </div>
+      <div class="promo-box">
+        <input type="text" id="promo-input" placeholder="Have a promo code?" maxlength="20">
+        <button type="button" id="promo-apply" onclick="applyPromo()">Apply</button>
+      </div>
+      <div class="promo-msg" id="promo-msg"></div>
       <p class="m2-hint">Every order is verified on WhatsApp before it's confirmed — choose how you'd like to pay:</p>
       <div class="m2-btns">
         <button class="m2-crypto" id="m2-crypto-btn">
@@ -760,7 +789,7 @@ function renderT(f){
     const d=new Date(t.date);
     const ds=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
     const ts=d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-    return `<div class="tc${lq?' lq':''}" data-id="${t.id}">
+    return `<div class="tc reveal${lq?' lq':''}" data-id="${t.id}">
       <div class="ct"><div class="ctl"></div>
         <span class="ccat ${bc}">${t.category}</span>
         <div class="cmatch">${t.match}</div>
@@ -785,6 +814,7 @@ function renderT(f){
       </div>
     </div>`;
   }).join('');
+  initReveal();
 }
 renderT('all');
 function filterT(f,b){document.querySelectorAll('.fb').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderT(f);uCDs();}
@@ -959,30 +989,84 @@ function selectSeat(idx){
   const seat = plan.seats[idx];
   if(!seat || seat.avail==='sold') return;
   currentSeat = seat;
+  currentDiscountPct = 0;
 
   document.getElementById('m2-match').textContent = currentTicket.match;
   document.getElementById('m2-seat-chosen').textContent = `📌 ${seat.name}`;
-  document.getElementById('m2-price').textContent = `$${seat.price.toLocaleString()}`;
+  document.getElementById('promo-input').value = '';
+  document.getElementById('promo-msg').textContent = '';
+  document.getElementById('promo-msg').className = 'promo-msg';
+  updatePriceDisplay();
 
+  document.getElementById('modal-step1').style.display='none';
+  document.getElementById('modal-step2').style.display='block';
+}
+
+// PROMO CODES — real discounts applied to the actual listed price, never inflated-then-slashed.
+const promoCodes = {
+  'WELCOME10': { pct: 10, label: 'Welcome discount' },
+  'FANZONE15': { pct: 15, label: 'Fan Zone partner discount' },
+  'SQUAD20':   { pct: 20, label: 'Squad discount' },
+  'FINAL30':   { pct: 30, label: 'Final promo — biggest discount' },
+};
+let currentDiscountPct = 0;
+
+function currentFinalPrice(){
+  if(!currentSeat) return 0;
+  return Math.round(currentSeat.price * (1 - currentDiscountPct/100));
+}
+
+function updatePriceDisplay(){
+  if(!currentSeat) return;
+  const finalPrice = currentFinalPrice();
+  const priceEl = document.getElementById('m2-price');
+  if(currentDiscountPct > 0){
+    priceEl.innerHTML = `<span class="m2-price-strike">$${currentSeat.price.toLocaleString()}</span>$${finalPrice.toLocaleString()}`;
+  } else {
+    priceEl.textContent = `$${finalPrice.toLocaleString()}`;
+  }
   const cryptoBtn = document.getElementById('m2-crypto-btn');
   const waBtn = document.getElementById('m2-wa-btn');
-
   cryptoBtn.onclick = () => {
     document.getElementById('mo').classList.remove('open');
     document.getElementById('payment').scrollIntoView({behavior:'smooth'});
   };
   waBtn.onclick = () => {
-    openWA(`Hi, I'd like to negotiate a ticket for ${currentTicket.match} — ${seat.name} — Listed at $${seat.price.toLocaleString()}`);
+    const discNote = currentDiscountPct > 0 ? ` (promo applied: -${currentDiscountPct}%, was $${currentSeat.price.toLocaleString()})` : '';
+    openWA(`Hi, I'd like to verify a ticket for ${currentTicket.match} — ${currentSeat.name} — $${finalPrice.toLocaleString()}${discNote}`);
   };
+}
 
-  document.getElementById('modal-step1').style.display='none';
-  document.getElementById('modal-step2').style.display='block';
+function applyPromo(){
+  const input = document.getElementById('promo-input');
+  const msg = document.getElementById('promo-msg');
+  const code = input.value.trim().toUpperCase();
+  if(!code){ msg.textContent = 'Enter a code first.'; msg.className = 'promo-msg err'; return; }
+  const found = promoCodes[code];
+  if(!found){ msg.textContent = 'That code isn\'t valid or has expired.'; msg.className = 'promo-msg err'; currentDiscountPct = 0; updatePriceDisplay(); return; }
+  currentDiscountPct = found.pct;
+  msg.textContent = `✓ ${found.label} applied — ${found.pct}% off`;
+  msg.className = 'promo-msg ok';
+  updatePriceDisplay();
 }
 
 function cModal(e){if(e.target.id==='mo')document.getElementById('mo').classList.remove('open');}
 function openWA(msg){window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,"_blank");return false;}
 function cpA(addr,btn){navigator.clipboard.writeText(addr).then(()=>{btn.textContent='Copied';btn.style.background='var(--g)';btn.style.color='#fff';setTimeout(()=>{btn.textContent='Copy';btn.style.background='';btn.style.color='';},2000);});}
 window.addEventListener('scroll',()=>{if(window.scrollY>300)document.getElementById('waf').style.display='flex';});
+
+// SCROLL-REVEAL — fades/slides elements into view as the user scrolls
+const revealObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in-view'); revealObserver.unobserve(en.target); } });
+},{threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+function initReveal(){
+  document.querySelectorAll('.reveal:not(.in-view)').forEach((el,i)=>{
+    el.classList.add('reveal-stagger');
+    el.style.setProperty('--ri', i % 8);
+    revealObserver.observe(el);
+  });
+}
+initReveal();
 (function(){const canvas=document.getElementById('fc');const ctx=canvas.getContext('2d');let W,H;function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}resize();window.addEventListener('resize',()=>{resize();draw();});function draw(){ctx.clearRect(0,0,W,H);ctx.strokeStyle='rgba(26,110,54,0.046)';ctx.lineWidth=1;for(let i=1;i<=13;i++){const y=i*(H/14);ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}for(let i=1;i<=9;i++){const x=i*(W/10);ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}ctx.strokeStyle='rgba(26,110,54,0.058)';ctx.lineWidth=1.2;const cx=W/2,cy=H/2,r=Math.min(W,H)*.14;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.arc(cx,cy,r*.08,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.moveTo(0,cy);ctx.lineTo(W,cy);ctx.stroke();ctx.strokeStyle='rgba(26,110,54,0.07)';ctx.lineWidth=1.5;ctx.strokeRect(16,16,W-32,H-32);}draw();})();
 </script>
 </body>
