@@ -350,6 +350,13 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
 .m2-crypto strong,.m2-wa strong{display:block;font-size:14px;color:var(--ink);font-weight:600;}
 .m2-crypto small,.m2-wa small{display:block;font-size:11px;color:var(--mute);margin-top:1px;font-weight:400;}
 .m2-verify-note{font-size:11.5px;color:var(--mute);background:var(--gl);border:1px solid var(--bd2);border-radius:8px;padding:10px 12px;margin-top:14px;line-height:1.5;}
+.contact-field{margin-bottom:4px;}
+.contact-field label{display:block;font-size:11.5px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.contact-field .req{color:var(--red);}
+.contact-field input{width:100%;padding:11px 13px;border-radius:7px;border:1px solid var(--bd2);font-family:"Inter",sans-serif;font-size:13px;background:var(--off);color:var(--ink);}
+.contact-field input:focus{outline:none;border-color:var(--g);background:#fff;}
+.contact-field input.field-err{border-color:var(--red);background:#fff5f4;}
+.lead-error{font-size:11.5px;color:var(--red);font-weight:500;min-height:14px;margin-bottom:12px;}
 .promo-box{display:flex;gap:8px;margin-bottom:6px;}
 .promo-box input{flex:1;padding:11px 13px;border-radius:7px;border:1px solid var(--bd2);font-family:"Inter",sans-serif;font-size:13px;background:var(--off);color:var(--ink);text-transform:uppercase;letter-spacing:.5px;}
 .promo-box input:focus{outline:none;border-color:var(--g);background:#fff;}
@@ -533,10 +540,10 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
         <div class="hrc-badge">VIP Category</div>
       </div>
       <div class="hr-card-body">
-        <div class="hrcb-price"><span>$</span>12,800</div>
-        <div class="hrcb-sub">per ticket · official face value $7,875 · crypto accepted</div>
+        <div class="hrcb-price"><span>$</span>15,800</div>
+        <div class="hrcb-sub">per ticket · crypto accepted</div>
         <div class="hrc-sc"><span class="prd"></span>Only 1 ticket remaining</div>
-        <button class="hrc-btn" onclick="openWA('Hi, I want to buy the World Cup Final VIP ticket at $12,800')">Secure This Ticket →</button>
+        <button class="hrc-btn" onclick="openWA('Hi, I want to buy the World Cup Final VIP ticket at $15,800')">Secure This Ticket →</button>
       </div>
     </div>
   </div>
@@ -759,6 +766,11 @@ footer{background:var(--ink);padding:52px 6% 28px;position:relative;overflow:hid
         <button type="button" id="promo-apply" onclick="applyPromo()">Apply</button>
       </div>
       <div class="promo-msg" id="promo-msg"></div>
+      <div class="contact-field">
+        <label for="lead-contact">Your WhatsApp number or email <span class="req">*</span></label>
+        <input type="text" id="lead-contact" placeholder="e.g. +234 801 234 5678 or you@email.com" required>
+      </div>
+      <div class="lead-error" id="lead-error"></div>
       <p class="m2-hint">Every order is verified on WhatsApp before it's confirmed — choose how you'd like to pay:</p>
       <div class="m2-btns">
         <button class="m2-crypto" id="m2-crypto-btn">
@@ -796,15 +808,15 @@ document.getElementById('cgrid').innerHTML=cryptos.map(c=>`<div class="cc"><div 
 // (e.g. "Portugal/Spain vs USA/Belgium") until those winners are confirmed — update the match
 // name once each round concludes.
 const tickets=[
-  {id:1,match:'FIFA World Cup Final',date:'2026-07-19T15:00:00',stadium:'MetLife Stadium',city:'East Rutherford, NJ',category:'VIP',cat:'vip',price:12800,officialBase:7875,qty:1,stage:'final',urg:Date.now()+3000000},
-  {id:2,match:'FIFA World Cup Final',date:'2026-07-19T15:00:00',stadium:'MetLife Stadium',city:'East Rutherford, NJ',category:'Category 1',cat:'cat1',price:9400,officialBase:6730,qty:3,stage:'final',urg:Date.now()+3000000},
-  {id:3,match:'Quarterfinal: France vs Morocco',date:'2026-07-09T16:00:00',stadium:'Gillette Stadium',city:'Foxborough, MA',category:'Category 1',cat:'cat1',price:3450,officialBase:890,qty:6,stage:'quarterfinal',urg:Date.now()+7200000},
-  {id:4,match:'Quarterfinal: Portugal/Spain vs USA/Belgium',date:'2026-07-10T15:00:00',stadium:'SoFi Stadium',city:'Inglewood, CA',category:'VIP',cat:'vip',price:5800,officialBase:1775,qty:3,stage:'quarterfinal',urg:Date.now()+18000000},
-  {id:5,match:'Quarterfinal: Brazil/Norway vs Mexico/England',date:'2026-07-11T17:00:00',stadium:'Hard Rock Stadium',city:'Miami Gardens, FL',category:'Category 1',cat:'cat1',price:3600,officialBase:950,qty:5,stage:'quarterfinal',urg:Date.now()+86400000},
-  {id:6,match:'Quarterfinal: Argentina/Egypt vs Switzerland/Colombia',date:'2026-07-11T21:00:00',stadium:'Arrowhead Stadium',city:'Kansas City, MO',category:'Category 2',cat:'cat2',price:2450,officialBase:640,qty:9,stage:'quarterfinal',urg:Date.now()+43200000},
-  {id:7,match:'Semi-Final — Dallas',date:'2026-07-14T15:00:00',stadium:'AT&T Stadium',city:'Arlington, TX',category:'VIP',cat:'vip',price:8200,officialBase:3295,qty:2,stage:'semifinal',urg:Date.now()+172800000},
-  {id:8,match:'Semi-Final — Atlanta',date:'2026-07-15T15:00:00',stadium:'Mercedes-Benz Stadium',city:'Atlanta, GA',category:'Category 1',cat:'cat1',price:6300,officialBase:2350,qty:4,stage:'semifinal',urg:Date.now()+5400000},
-  {id:9,match:'Third-Place Play-off',date:'2026-07-18T17:00:00',stadium:'Hard Rock Stadium',city:'Miami Gardens, FL',category:'Category 2',cat:'cat2',price:2800,officialBase:900,qty:10,stage:'third',urg:Date.now()+9000000},
+  {id:1,match:'FIFA World Cup Final',date:'2026-07-19T15:00:00',stadium:'MetLife Stadium',city:'East Rutherford, NJ',category:'VIP',cat:'vip',price:15800,officialBase:7875,qty:1,stage:'final',urg:Date.now()+3000000},
+  {id:2,match:'FIFA World Cup Final',date:'2026-07-19T15:00:00',stadium:'MetLife Stadium',city:'East Rutherford, NJ',category:'Category 1',cat:'cat1',price:13500,officialBase:6730,qty:3,stage:'final',urg:Date.now()+3000000},
+  {id:3,match:'Quarterfinal: France vs Morocco',date:'2026-07-09T16:00:00',stadium:'Gillette Stadium',city:'Foxborough, MA',category:'Category 1',cat:'cat1',price:1800,officialBase:890,qty:6,stage:'quarterfinal',urg:Date.now()+7200000},
+  {id:4,match:'Quarterfinal: Portugal/Spain vs USA/Belgium',date:'2026-07-10T15:00:00',stadium:'SoFi Stadium',city:'Inglewood, CA',category:'VIP',cat:'vip',price:3600,officialBase:1775,qty:3,stage:'quarterfinal',urg:Date.now()+18000000},
+  {id:5,match:'Quarterfinal: Brazil/Norway vs Mexico/England',date:'2026-07-11T17:00:00',stadium:'Hard Rock Stadium',city:'Miami Gardens, FL',category:'Category 1',cat:'cat1',price:1900,officialBase:950,qty:5,stage:'quarterfinal',urg:Date.now()+86400000},
+  {id:6,match:'Quarterfinal: Argentina/Egypt vs Switzerland/Colombia',date:'2026-07-11T21:00:00',stadium:'Arrowhead Stadium',city:'Kansas City, MO',category:'Category 2',cat:'cat2',price:1300,officialBase:640,qty:9,stage:'quarterfinal',urg:Date.now()+43200000},
+  {id:7,match:'Semi-Final — Dallas',date:'2026-07-14T15:00:00',stadium:'AT&T Stadium',city:'Arlington, TX',category:'VIP',cat:'vip',price:6600,officialBase:3295,qty:2,stage:'semifinal',urg:Date.now()+172800000},
+  {id:8,match:'Semi-Final — Atlanta',date:'2026-07-15T15:00:00',stadium:'Mercedes-Benz Stadium',city:'Atlanta, GA',category:'Category 1',cat:'cat1',price:4700,officialBase:2350,qty:4,stage:'semifinal',urg:Date.now()+5400000},
+  {id:9,match:'Third-Place Play-off',date:'2026-07-18T17:00:00',stadium:'Hard Rock Stadium',city:'Miami Gardens, FL',category:'Category 2',cat:'cat2',price:1800,officialBase:900,qty:10,stage:'third',urg:Date.now()+9000000},
 ];
 const WSV=`<svg class="wsv" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`;
 // SCROLL-REVEAL — fades/slides elements into view as the user scrolls
@@ -857,7 +869,6 @@ function renderT(f){
         <div class="cprow">
           <div>
             ${priceHtml}
-            <div class="cps">Official face value: $${t.officialBase.toLocaleString()}</div>
           </div>
           <div class="cpr"><div class="cppt">per ticket</div><div class="cpcp">Crypto accepted</div></div>
         </div>
@@ -917,85 +928,85 @@ const seatPlans = {
   1: {
     tunnel: true,
     seats: [
-      { name:'VIP — Pitchside Lounge', badge:'VIP', stripe:'vip', price:12800, qty:1, desc:'The Final. The ultimate seat. Pitchside lounge at MetLife Stadium.', avail:'hot' },
-      { name:'FIFA Pavilion — Hospitality', badge:'VIP', stripe:'vip', price:18500, qty:0, desc:'Exclusive FIFA Pavilion access. Sold out.', avail:'sold' },
-      { name:'Private Suite — The Final', badge:'VIP', stripe:'vip', price:22000, qty:1, desc:'Full private suite. World Cup Final. Once every four years.', avail:'hot' },
-      { name:'🏟 Tunnel Club — The Final', badge:'Tunnel', stripe:'tunnel', price:26000, qty:1, desc:'Watch the finalists walk out. Tunnel access at the World Cup Final.', avail:'hot' },
+      { name:'VIP — Pitchside Lounge', badge:'VIP', stripe:'vip', price:15800, qty:1, desc:'The Final. The ultimate seat. Pitchside lounge at MetLife Stadium.', avail:'hot' },
+      { name:'FIFA Pavilion — Hospitality', badge:'VIP', stripe:'vip', price:22830, qty:0, desc:'Exclusive FIFA Pavilion access. Sold out.', avail:'sold' },
+      { name:'Private Suite — The Final', badge:'VIP', stripe:'vip', price:27160, qty:1, desc:'Full private suite. World Cup Final. Once every four years.', avail:'hot' },
+      { name:'🏟 Tunnel Club — The Final', badge:'Tunnel', stripe:'tunnel', price:32090, qty:1, desc:'Watch the finalists walk out. Tunnel access at the World Cup Final.', avail:'hot' },
     ]
   },
   // FIFA World Cup Final — Cat1 — 3 positions
   2: {
     tunnel: false,
     seats: [
-      { name:'Category 1 — Lower Sideline', badge:'Premium', stripe:'cat1', price:9400, qty:3, desc:'Best non-VIP seats for the Final. Central lower-tier MetLife.', avail:'warn' },
-      { name:'Front Category 1 — Row C', badge:'Premium', stripe:'cat1', price:10800, qty:1, desc:'Row C front of Cat 1. As close as it gets without VIP.', avail:'hot' },
-      { name:'Category 2 — Lower Corner', badge:'', stripe:'cat2', price:6900, qty:0, desc:'Sold out. Lower corner view for the Final.', avail:'sold' },
+      { name:'Category 1 — Lower Sideline', badge:'Premium', stripe:'cat1', price:13500, qty:3, desc:'Best non-VIP seats for the Final. Central lower-tier MetLife.', avail:'warn' },
+      { name:'Front Category 1 — Row C', badge:'Premium', stripe:'cat1', price:15510, qty:1, desc:'Row C front of Cat 1. As close as it gets without VIP.', avail:'hot' },
+      { name:'Category 2 — Lower Corner', badge:'', stripe:'cat2', price:9910, qty:0, desc:'Sold out. Lower corner view for the Final.', avail:'sold' },
     ]
   },
   // QF1: France vs Morocco — Gillette Stadium — Cat1 — 3 positions
   3: {
     tunnel: false,
     seats: [
-      { name:'Category 1 — Sideline Lower', badge:'Premium', stripe:'cat1', price:3450, qty:6, desc:'Lower-tier sideline in Gillette Stadium. Quarterfinal atmosphere.', avail:'ok' },
-      { name:'Category 2 — Upper Sideline', badge:'', stripe:'cat2', price:2200, qty:12, desc:'Elevated sideline view, upper tier.', avail:'ok' },
-      { name:'Category 4 — Upper End Zone', badge:'', stripe:'cat4', price:1350, qty:6, desc:'Highest tier. Budget option. Great atmosphere end zone.', avail:'ok' },
+      { name:'Category 1 — Sideline Lower', badge:'Premium', stripe:'cat1', price:1800, qty:6, desc:'Lower-tier sideline in Gillette Stadium. Quarterfinal atmosphere.', avail:'ok' },
+      { name:'Category 2 — Upper Sideline', badge:'', stripe:'cat2', price:1150, qty:12, desc:'Elevated sideline view, upper tier.', avail:'ok' },
+      { name:'Category 4 — Upper End Zone', badge:'', stripe:'cat4', price:710, qty:6, desc:'Highest tier. Budget option. Great atmosphere end zone.', avail:'ok' },
     ]
   },
   // QF2: Portugal/Spain vs USA/Belgium — SoFi Stadium — VIP — 3 positions
   4: {
     tunnel: false,
     seats: [
-      { name:'VIP — Pitchside Lounge', badge:'VIP', stripe:'vip', price:5800, qty:2, desc:'Shared premium lounge with direct pitch-side seating access.', avail:'hot' },
-      { name:'Private Suite — Corporate Box', badge:'VIP', stripe:'vip', price:8200, qty:1, desc:'Private luxury suite. Catered, air-conditioned, exclusive.', avail:'hot' },
-      { name:'Category 1 — Lower Sideline', badge:'Premium', stripe:'cat1', price:3900, qty:4, desc:'Prime lower-tier central seats. SoFi Stadium sideline.', avail:'warn' },
+      { name:'VIP — Pitchside Lounge', badge:'VIP', stripe:'vip', price:3600, qty:2, desc:'Shared premium lounge with direct pitch-side seating access.', avail:'hot' },
+      { name:'Private Suite — Corporate Box', badge:'VIP', stripe:'vip', price:5090, qty:1, desc:'Private luxury suite. Catered, air-conditioned, exclusive.', avail:'hot' },
+      { name:'Category 1 — Lower Sideline', badge:'Premium', stripe:'cat1', price:2420, qty:4, desc:'Prime lower-tier central seats. SoFi Stadium sideline.', avail:'warn' },
     ]
   },
   // QF3: Brazil/Norway vs Mexico/England — Hard Rock Stadium — Cat1 — 4 positions, tunnel available
   5: {
     tunnel: true,
     seats: [
-      { name:'Category 1 — Front Sideline', badge:'Premium', stripe:'cat1', price:3600, qty:5, desc:'Prime Hard Rock Stadium lower-tier. Quarterfinal atmosphere.', avail:'warn' },
-      { name:'Front Category 1 — Row B', badge:'Premium', stripe:'cat1', price:4100, qty:2, desc:'Row B, Cat 1 section. Virtually pitchside.', avail:'hot' },
-      { name:'Category 2 — Lower Corner', badge:'', stripe:'cat2', price:2600, qty:6, desc:'Corner block with full pitch view. Lower tier.', avail:'ok' },
-      { name:'🏟 Tunnel Club Access', badge:'Tunnel', stripe:'tunnel', price:6800, qty:2, desc:'Exclusive tunnel-side access. See players up close pre-match.', avail:'hot' },
+      { name:'Category 1 — Front Sideline', badge:'Premium', stripe:'cat1', price:1900, qty:5, desc:'Prime Hard Rock Stadium lower-tier. Quarterfinal atmosphere.', avail:'warn' },
+      { name:'Front Category 1 — Row B', badge:'Premium', stripe:'cat1', price:2160, qty:2, desc:'Row B, Cat 1 section. Virtually pitchside.', avail:'hot' },
+      { name:'Category 2 — Lower Corner', badge:'', stripe:'cat2', price:1370, qty:6, desc:'Corner block with full pitch view. Lower tier.', avail:'ok' },
+      { name:'🏟 Tunnel Club Access', badge:'Tunnel', stripe:'tunnel', price:3590, qty:2, desc:'Exclusive tunnel-side access. See players up close pre-match.', avail:'hot' },
     ]
   },
   // QF4: Argentina/Egypt vs Switzerland/Colombia — Arrowhead Stadium — Cat2 — 3 positions
   6: {
     tunnel: false,
     seats: [
-      { name:'Category 1 — Sideline Central', badge:'Premium', stripe:'cat1', price:3000, qty:4, desc:'Lower-tier prime sideline. Arrowhead Stadium — the loudest venue at the World Cup.', avail:'ok' },
-      { name:'Category 2 — Upper Sideline', badge:'', stripe:'cat2', price:2450, qty:9, desc:'Upper-tier sideline. Elevated panoramic view.', avail:'ok' },
-      { name:'Category 3 — Behind the Goal', badge:'', stripe:'cat3', price:1690, qty:5, desc:'Upper end-zone view. Electric atmosphere behind the goal.', avail:'warn' },
+      { name:'Category 1 — Sideline Central', badge:'Premium', stripe:'cat1', price:1590, qty:4, desc:'Lower-tier prime sideline. Arrowhead Stadium — the loudest venue at the World Cup.', avail:'ok' },
+      { name:'Category 2 — Upper Sideline', badge:'', stripe:'cat2', price:1300, qty:9, desc:'Upper-tier sideline. Elevated panoramic view.', avail:'ok' },
+      { name:'Category 3 — Behind the Goal', badge:'', stripe:'cat3', price:890, qty:5, desc:'Upper end-zone view. Electric atmosphere behind the goal.', avail:'warn' },
     ]
   },
   // Semi-Final — Dallas (AT&T Stadium) — VIP — 4 positions
   7: {
     tunnel: true,
     seats: [
-      { name:'VIP — Pitchside Lounge', badge:'VIP', stripe:'vip', price:8200, qty:2, desc:'Premium shared lounge. Pitchside view at AT&T Stadium. Semi-final energy.', avail:'hot' },
-      { name:'Private Suite — Level 3', badge:'VIP', stripe:'vip', price:12000, qty:1, desc:'Exclusive AT&T Stadium suite. Semi-Final. Fully catered, private.', avail:'hot' },
-      { name:'Category 1 — Lower Sideline', badge:'Premium', stripe:'cat1', price:5400, qty:0, desc:'Sold out. Lower sideline for the Dallas Semi-Final.', avail:'sold' },
-      { name:'🏟 Tunnel Club Access', badge:'Tunnel', stripe:'tunnel', price:14500, qty:1, desc:'Once-in-a-lifetime tunnel access. Semi-Final at AT&T Stadium.', avail:'hot' },
+      { name:'VIP — Pitchside Lounge', badge:'VIP', stripe:'vip', price:6600, qty:2, desc:'Premium shared lounge. Pitchside view at AT&T Stadium. Semi-final energy.', avail:'hot' },
+      { name:'Private Suite — Level 3', badge:'VIP', stripe:'vip', price:9650, qty:1, desc:'Exclusive AT&T Stadium suite. Semi-Final. Fully catered, private.', avail:'hot' },
+      { name:'Category 1 — Lower Sideline', badge:'Premium', stripe:'cat1', price:4350, qty:0, desc:'Sold out. Lower sideline for the Dallas Semi-Final.', avail:'sold' },
+      { name:'🏟 Tunnel Club Access', badge:'Tunnel', stripe:'tunnel', price:11670, qty:1, desc:'Once-in-a-lifetime tunnel access. Semi-Final at AT&T Stadium.', avail:'hot' },
     ]
   },
   // Semi-Final — Atlanta (Mercedes-Benz Stadium) — Cat1 — 4 positions
   8: {
     tunnel: false,
     seats: [
-      { name:'Category 1 — Lower Sideline', badge:'Premium', stripe:'cat1', price:6300, qty:2, desc:'Mercedes-Benz Stadium lower-tier. Semi-Final — premium spot.', avail:'hot' },
-      { name:'Category 2 — Lower Sideline', badge:'', stripe:'cat2', price:4900, qty:7, desc:'Upper sideline with sweeping stadium view.', avail:'ok' },
-      { name:'Category 2 — Corner Lower', badge:'', stripe:'cat2', price:4200, qty:4, desc:'Corner section, lower tier. Good diagonal view.', avail:'warn' },
-      { name:'Category 4 — Upper Deck End Zone', badge:'', stripe:'cat4', price:2600, qty:6, desc:'Top-deck behind the goal. Most affordable Semi-Final seats.', avail:'ok' },
+      { name:'Category 1 — Lower Sideline', badge:'Premium', stripe:'cat1', price:4700, qty:2, desc:'Mercedes-Benz Stadium lower-tier. Semi-Final — premium spot.', avail:'hot' },
+      { name:'Category 2 — Lower Sideline', badge:'', stripe:'cat2', price:3660, qty:7, desc:'Upper sideline with sweeping stadium view.', avail:'ok' },
+      { name:'Category 2 — Corner Lower', badge:'', stripe:'cat2', price:3130, qty:4, desc:'Corner section, lower tier. Good diagonal view.', avail:'warn' },
+      { name:'Category 4 — Upper Deck End Zone', badge:'', stripe:'cat4', price:1940, qty:6, desc:'Top-deck behind the goal. Most affordable Semi-Final seats.', avail:'ok' },
     ]
   },
   // Third-Place Play-off — Hard Rock Stadium — Cat2 — 3 positions
   9: {
     tunnel: false,
     seats: [
-      { name:'Category 2 — Lower Sideline', badge:'', stripe:'cat2', price:2800, qty:10, desc:'Good central lower-tier view at Hard Rock Stadium.', avail:'ok' },
-      { name:'Category 3 — Upper Behind Goal', badge:'', stripe:'cat3', price:1900, qty:14, desc:'Upper end-zone. Great value for the third-place match.', avail:'ok' },
-      { name:'Easy Access Seating', badge:'', stripe:'cat3', price:2050, qty:4, desc:'Accessible seating area near the concourse level. Extra comfort.', avail:'warn' },
+      { name:'Category 2 — Lower Sideline', badge:'', stripe:'cat2', price:1800, qty:10, desc:'Good central lower-tier view at Hard Rock Stadium.', avail:'ok' },
+      { name:'Category 3 — Upper Behind Goal', badge:'', stripe:'cat3', price:1220, qty:14, desc:'Upper end-zone. Great value for the third-place match.', avail:'ok' },
+      { name:'Easy Access Seating', badge:'', stripe:'cat3', price:1320, qty:4, desc:'Accessible seating area near the concourse level. Extra comfort.', avail:'warn' },
     ]
   },
 };
@@ -1078,6 +1089,9 @@ function selectSeat(idx){
     document.getElementById('promo-msg').className = 'promo-msg';
   }
   updatePriceDisplay();
+  document.getElementById('lead-contact').value = '';
+  document.getElementById('lead-contact').classList.remove('field-err');
+  document.getElementById('lead-error').textContent = '';
 
   document.getElementById('modal-step1').style.display='none';
   document.getElementById('modal-step2').style.display='block';
@@ -1109,13 +1123,80 @@ function updatePriceDisplay(){
   const cryptoBtn = document.getElementById('m2-crypto-btn');
   const waBtn = document.getElementById('m2-wa-btn');
   cryptoBtn.onclick = () => {
+    if(!validateLeadContact()) return;
+    sendLeadNotification('Crypto', finalPrice);
     document.getElementById('mo').classList.remove('open');
     document.getElementById('payment').scrollIntoView({behavior:'smooth'});
   };
   waBtn.onclick = () => {
+    if(!validateLeadContact()) return;
+    sendLeadNotification('WhatsApp', finalPrice);
     const discNote = currentDiscountPct > 0 ? ` (promo applied: -${currentDiscountPct}%, was $${currentSeat.price.toLocaleString()})` : '';
     openWA(`Hi, I'd like to verify a ticket for ${currentTicket.match} — ${currentSeat.name} — $${finalPrice.toLocaleString()}${discNote}`);
   };
+}
+
+// LEAD CAPTURE — validates the compulsory contact field, then notifies you via
+// Web3Forms (email + dashboard) and Telegram (instant push). Both run in parallel;
+// neither blocks the customer if one happens to fail.
+function validateLeadContact(){
+  const input = document.getElementById('lead-contact');
+  const errEl = document.getElementById('lead-error');
+  const val = input.value.trim();
+  const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+  const isPhone = /^\+?[0-9\s\-()]{7,20}$/.test(val);
+  if(!val || (!isEmail && !isPhone)){
+    input.classList.add('field-err');
+    errEl.textContent = 'Enter a valid WhatsApp number or email to continue.';
+    input.focus();
+    return false;
+  }
+  input.classList.remove('field-err');
+  errEl.textContent = '';
+  return true;
+}
+
+// --- Fill these in once you've created your own Web3Forms key and Telegram bot ---
+const WEB3FORMS_KEY = 'a287449d-a025-435f-8312-9cc144fb1df0';
+const TELEGRAM_BOT_TOKEN = 'a287449d-a025-435f-8312-9cc144fb1df0';
+const TELEGRAM_CHAT_ID = 'YOUR_TELEGRAM_CHAT_ID';
+
+function sendLeadNotification(method, finalPrice){
+  const contact = document.getElementById('lead-contact').value.trim();
+  const promo = (promoState[currentTicket.id] && promoState[currentTicket.id].status==='ok')
+    ? `${promoState[currentTicket.id].code} (${promoState[currentTicket.id].pct}% off)` : 'None';
+  const summary = `New ticket lead
+Match: ${currentTicket.match}
+Seat: ${currentSeat.name}
+Price: $${finalPrice.toLocaleString()}
+Promo code used: ${promo}
+Contact: ${contact}
+Payment method chosen: ${method}`;
+
+  if(WEB3FORMS_KEY !== 'YOUR_WEB3FORMS_ACCESS_KEY'){
+    fetch('https://api.web3forms.com/submit', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        subject: 'New TrueTicket lead',
+        match: currentTicket.match,
+        seat: currentSeat.name,
+        price: `$${finalPrice.toLocaleString()}`,
+        promo_code: promo,
+        contact: contact,
+        payment_method: method,
+      })
+    }).catch(()=>{});
+  }
+
+  if(TELEGRAM_BOT_TOKEN !== 'YOUR_TELEGRAM_BOT_TOKEN'){
+    fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: summary })
+    }).catch(()=>{});
+  }
 }
 
 function applyPromo(){
