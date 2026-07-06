@@ -179,10 +179,6 @@ section{position:relative;z-index:1;}
 .csc{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding:8px 11px;background:var(--off);border-radius:4px;border:1px solid var(--bd);}
 .cql{font-size:11.5px;font-weight:600;}
 .qc{color:var(--red)}.qw{color:var(--amb)}.qo{color:var(--g)}
-.ccd{font-size:14px;font-weight:600;letter-spacing:.5px;}
-.cdc{color:var(--red);animation:blk 1s ease-in-out infinite;}.cdw{color:var(--amb);}.cdo{color:var(--mute2);}
-@keyframes blk{0%,100%{opacity:1}50%{opacity:.4}}
-.ccdl{font-size:9.5px;color:var(--mute2);display:block;text-align:right;}
 .cprow{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;}
 .cprice{font-family:"Bebas Neue",sans-serif;font-size:38px;letter-spacing:1px;color:var(--ink);}
 .cprice .cu{font-size:18px;color:var(--mute2);}
@@ -864,7 +860,6 @@ function renderT(f){
       <div class="cbody">
         <div class="csc">
           <span class="cql ${qc}">${t.qty===1?'⚠ Last ticket!':t.qty<=3?'🔥 Only '+t.qty+' left':t.qty+' available'}</span>
-          <div style="text-align:right"><span class="ccd cdo" id="cd-${t.id}">--:--:--</span><span class="ccdl">time left</span></div>
         </div>
         <div class="cprow">
           <div>
@@ -891,7 +886,7 @@ const promoState = {};
 function applyCardPromo(id){
   const input = document.getElementById('promo-input-'+id);
   const code = input.value.trim().toUpperCase();
-  if(!code){ delete promoState[id]; renderT(currentFilter); uCDs(); return; }
+  if(!code){ delete promoState[id]; renderT(currentFilter); return; }
   const found = promoCodes[code];
   if(!found){
     promoState[id] = { code, pct:0, label:'', status:'err' };
@@ -899,15 +894,10 @@ function applyCardPromo(id){
     promoState[id] = { code, pct: found.pct, label: found.label, status:'ok' };
   }
   renderT(currentFilter);
-  uCDs();
 }
 renderT('all');
-function filterT(f,b){document.querySelectorAll('.fb').forEach(x=>x.classList.remove('active'));b.classList.add('active');currentFilter=f;renderT(f);uCDs();}
-function pad(n){return String(n).padStart(2,'0');}
-function fmtCd(ms){if(ms<=0)return'00:00:00';const h=Math.floor(ms/3600000),m=Math.floor((ms%3600000)/60000),s=Math.floor((ms%60000)/1000);if(h>99){const d=Math.floor(h/24);return d+'d '+pad(h%24)+'h';}return pad(h)+':'+pad(m)+':'+pad(s);}
-function cdCls(ms){return ms<3600000?'cdc':ms<7200000?'cdw':'cdo';}
-function uCDs(){tickets.forEach(t=>{const el=document.getElementById('cd-'+t.id);if(!el)return;const r=t.urg-Date.now();el.textContent=fmtCd(r);el.className='ccd '+cdCls(r);});}
-uCDs();setInterval(uCDs,1000);
+function filterT(f,b){document.querySelectorAll('.fb').forEach(x=>x.classList.remove('active'));b.classList.add('active');currentFilter=f;renderT(f);}
+
 const td=['🔥 World Cup Final VIP — 1 left','Sold: France vs Morocco QF — 4 mins ago','⚡ Semi-Final Dallas — 2 seats left','Quarterfinal Miami — Cat.1 3 left','Semi-Final Atlanta — Selling fast','Confirmed: Quarterfinal Kansas City Cat.2','Third-Place Play-off Miami — 4 remaining','World Cup Final Cat.1 — 3 left'];
 document.getElementById('ticker').innerHTML=[...td,...td].map(t=>`<span class="tkit"><span class="tksep">◆</span> <b>${t.split('—')[0].trim()}</b>${t.includes('—')?' — '+t.split('—').slice(1).join('—').trim():''}</span>`).join('');
 const faqs=[
